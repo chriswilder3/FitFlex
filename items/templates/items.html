@@ -11,22 +11,14 @@
         Items :
     </h1>
     <ul>
-        <li>
-            Resistance Bands (Set of 5): $15.99
-            Multi-strength bands perfect for home or gym workouts.
-        </li>
-        <li>
-            High-Performance Yoga Mat: $24.99
-            Non-slip surface, extra cushioning, and eco-friendly material.
-        </li>
-        <li>
-            Quick-Dry Workout Tee: $12.99
-            Lightweight, breathable, and designed for intense sessions.
-        </li>
-        <li>
-            Massage Roller: $19.99
-            Ease muscle tension and improve recovery post-workout.
-        </li>    
+        {% for x in myitems%}
+
+        <li> <a href="item_details/{{x.id}}"> {{x.name}} {{x.price}} </a> </li> 
+            
+            {% comment %} {{ x.id }} dynamically inserts the ID of the current member (x) 
+            into the URL.and hence hyperlinks are created for each member {% endcomment %}
+        
+        {% endfor %}
         
     </ul>
 </body>

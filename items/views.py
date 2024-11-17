@@ -10,6 +10,8 @@ from django.template import loader
                 # Django's template system. They facilitate the use of 
                 # templates for dynamically rendering HTML or other content.
 
+from .models import Item # Import the Item class from the models file
+
 # Create your views here.
 def sample( request ):     # request object is instance of Http request and
                     # contains infn like method(GET),headers,query params etc
@@ -122,9 +124,52 @@ def items(request):
 
        # Now lets load the model data in the views to send it to the
               # template.
-       
-              
+       myitems = Item.objects.all().values()
+              # Items queryset to be sent
+       myTemplate = loader.get_template('items.html')
 
+       context = {
+              'myitems' : myitems,
+       }
+              # context is python dict, containing data to be sent to 
+              # the template. Why dict?
+              # The template engine expects a mapping of variable 
+              # names (keys) to their values. Again Why?
+              # The keys in the dictionary become the variable names 
+              # accessible in the template.
+              # The values are the actual data that will replace those
+              # variables during template rendering.
+
+       return HttpResponse( myTemplate.render( context, request))
+              # Here Render() processes html template, which involves
+              # injecting dynamic data. Hence it needs context.
+
+              # When u provide context/data to the render(), it
+              # also uses request object internally. Hence we provide
+              # request also.
+
+def item_details( request , id):
+              # Note that the "id" parameter here is extracted from url
+              # passed by userclick, and sent to this view by the
+              # urls.py where while defining urlpatterns, we seperate
+              # parameters like id.
+
+              # Now the item correspoding to id requested must be 
+              # querried and injected back to template
+
+       requested_Item = Item.objects.get(id = id) 
+              # There 2 main methods for filtering/querrying data in django
+
+              # get() : Fetches a single object from the database that matches 
+                            # the given filter criteria.
+                             
+              # filter() : when you want to get all objects that match your
+                                   # lookup parameters.
+       template = loader.get_template('item_details.html')
+       context = {
+              'myitem' : requested_Item,
+       }
+       return HttpResponse( template.render( context, request))
 
 
 

@@ -4,41 +4,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
 <body>
      <div class="nav-bar">
-        <nav>
-            <ul>
-                <li>
+        <nav >
+            <ul class="flex flex-row bg-slate-700 
+                text-red-600 text-lg text-center">
+
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
                     <a href="/">Home</a>
                 </li>
-                <li>
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
                     <a href="/items/">Shop</a>
                 </li>
-                <li>
-                    <a href="#">About us</a>
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
+                    <a href="#">About</a>
                 </li>
-                <li>
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
                     <a href="#">Contact</a>
                 </li>
             </ul>
         </nav>
     </div>
-
-    <h1>
-        Items :
-    </h1>
-    <ul>
-        {% for x in myitems%}
-
-        <li> <a href="item_details/{{x.id}}"> {{x.name}} {{x.price}} </a> </li> 
+    <div class="jumbotron p-3 mx-3">
+        <h1 class="text-5xl text-red-600 py-4 font-bold">
+            Items :
+        </h1>
+        <ul class="flex flex-row flex-wrap m-3 text-red-500 ">
+            {% for x in myitems%}
+            <li class="basis-4 p-4 mx-3 border-2 bg-red-100 rounded-md"> <a href="item_details/{{x.id}}"> {{x.name}} {{x.price}} </a> </li> 
+                
+                {% comment %} {{ x.id }} dynamically inserts the ID of the current member (x) 
+                into the URL.and hence hyperlinks are created for each member {% endcomment %}
             
-            {% comment %} {{ x.id }} dynamically inserts the ID of the current member (x) 
-            into the URL.and hence hyperlinks are created for each member {% endcomment %}
-        
-        {% endfor %}
-        
-    </ul>
+            {% endfor %}
+        </ul>
+
+        <a href="#" class="bg-red-500 hover:bg-red-300 hover:text-slate-500
+            text-white text-2xl px-2 py-1 mt-3 rounded-md"> 
+            More
+        </a>
+    </div>
+
+    <footer class=" bg-orange-200 my-3 bottom-0">
+        <h3 class=" ml-4 text-xl pt-3">
+            Also available in :
+        </h3>
+        <div class="flex flex-row justify-center my-3 py-3">
+            <div class="basis-2 mx-3 ">
+                Bangalore 
+            </div>
+            <div class="basis-2 mx-3 ">
+                Mumbai 
+            </div>
+            <div class="basis-2 mx-3 ">
+                Delhi
+            </div>
+        </div>
+ 
 </body>
 </html>

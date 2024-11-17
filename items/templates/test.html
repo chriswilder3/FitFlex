@@ -47,6 +47,104 @@
         <h1>Hello Weekend!</h1>
     {% endif %} 
 
+{% comment %} ---------------------------------------------------------- {% endcomment %}
+    
+    {% if greeting == 1 and day == "Friday" or greeting == 5 %}
+        Please
+    {% endif%} 
+
+     {% comment %} Is same as  {% endcomment %}
+
+    {% comment %}
+        {% if (greeting == 1 and day == "Friday") or greeting == 5 %}
+            Please
+        {% endif%}  
+    {% endcomment %}
+
+    {% comment %} in Django. Why ? 
+    Parentheses are not allowed in if statements
+    in Django, so when you combine and and or operators, it is 
+    important to know that parentheses are added for and but not for or {% endcomment %}
+
+    {% with var1=x var2=x %} #
+        {% if var1 is var2 %}
+             <h1>YES</h1>
+        {% else %}
+             <h1>NO</h1>
+        {% endif %}
+    {% endwith %}
+    {% comment %} with tag in django is used for declaring temp variables
+     of block like scope ie, these variables are valid within the with 
+     tag they are declred in
+     {% endcomment %}
+
+     {% for x in members reversed %}
+        <h1>{{ x.id }}</h1>
+        <p>
+        {{ x.firstname }}
+        {{ x.lastname }}
+        </p>
+    {% endfor %} 
+    {% comment %} Its a for loop that runs from last elem to first. {% endcomment %}
+
+    {% comment %} empty is a block within the for loop, where we can define
+    what actions to take, if one of items/records we are looping through
+    turnout to be empty {% endcomment %}
+    <ul>
+        {% for x in emptytestobject %}
+            <li>{{ x.firstname }}</li>
+        {% empty %}
+            <li>No members</li>
+        {% endfor %}
+    </ul> 
+
+    {% comment %} 
+    The empty keyword can also be used if the object does not exist:
+     {% endcomment %}
+
+     {% with temp=7 %}
+        {% for x in notTemp%}
+            x
+        {% empty %}
+            No items
+        {% endfor%}
+     {% endwith %}
+
+    {% comment %} 
+
+    In with tag make sure unnecessary whitespace are not given.
+    Ex : %with temp =7% gives error. It must always
+    be % with temp=7 %
+
+    {% endcomment %}
+
+    {% comment %} 
+    Forloop has several property/variables that we can use at each
+    iteration to know their value
+
+    forloop.counter   : gives 1 based counter (position of curr itern)
+    forloop.counter0  : gives 0-based counter (position of curr itern)
+    forloop.first   : bool indicating whether its 1st itern 
+    forloop.last    : bool indicating whether its last itern
+    forloop.parentloop : For nested loops, gives reference of parent loop,
+             so that we can use its properties/counters also.
+    forloop.revcounter : posn of iteration from last
+    forloop.revcounter0: same as above but 0-based 
+
+    {% endcomment %}
+
+    {% for x in animals%}
+        {% if forloop.first %}
+            First Iter!
+        {% endif%}
+        {{x}} : {{ forloop.revcounter0 }}
+    {% endfor %}
+
+    {% comment %} 
+    Op:
+    First Iter! tiger : 3 monkey : 2 cat : 1 dog : 0 
+    {% endcomment %}
+
     
     
 

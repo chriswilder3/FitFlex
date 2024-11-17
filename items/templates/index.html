@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,37 +6,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitFlex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body{
+            
+        }
+    </style>
+
 </head>
+
 <body>
     <div class="nav-bar">
-        <nav>
-            <ul>
-                <li>
+        <nav >
+            <ul class="flex flex-row bg-slate-700 
+                text-red-600 text-lg text-center">
+
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
                     <a href="/">Home</a>
                 </li>
-                <li>
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
                     <a href="/items/">Shop</a>
                 </li>
-                <li>
-                    <a href="#">About us</a>
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
+                    <a href="#">About</a>
                 </li>
-                <li>
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
                     <a href="#">Contact</a>
                 </li>
             </ul>
         </nav>
     </div>
-    <div class="jumbotron">
-        <h1>
+    <div class="jumbotron p-3 mx-3 
+            bg-[url('{% static 'man_run_sports.png'%}')]">
+        <h1 class="text-5xl text-red-600 py-4 font-bold">
             FitFlex 
         </h1>
-        <h3>
+        <h3 class=" text-3xl py-2">
             Gear Up for Your Fitness Journey
         </h3>
-        <p>
+        <p class=" py-2 text-xl my-3">
             An online store specializing in fitness gear, apparel, and accessories to empower health enthusiasts and athletes.
         </p>
+        <a href="/items" class="bg-red-500 hover:bg-red-300 hover:text-slate-500
+            text-white text-2xl px-2 py-1 mt-3 rounded-md"> 
+            Buy Now
+        </a>
     </div>
+
+    <footer class=" bg-orange-200 my-3 bottom-0">
+        <h3 class=" ml-4 text-xl pt-3">
+            Also available in :
+        </h3>
+        <div class="flex flex-row justify-center my-3 py-3">
+            <div class="basis-2 mx-3 ">
+                Bangalore 
+            </div>
+            <div class="basis-2 mx-3 ">
+                Mumbai 
+            </div>
+            <div class="basis-2 mx-3 ">
+                Delhi
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>

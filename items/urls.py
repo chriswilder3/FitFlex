@@ -13,7 +13,7 @@ urlpatterns = [
     # The base_url is defined in projects urls.py, so make sure to
     # to route it appropriately.
 
-    path('items/item_details/<int:id>', views.item_details, name='details')
+    path('items/item_details/<int:id>', views.item_details, name='details'),
 
     # items/items_details/: This part of the URL is static. 
     # It tells Django to match this specific part of the URL path exactly.
@@ -22,5 +22,10 @@ urlpatterns = [
     # will expect an integer value for id to appear in the URL. The value
     #  will be passed to the corresponding view function as a parameter.
     # Ex: if /items/items_details/5/ is the url, id=5 is passed to view
+
+    path('', views.home, name='home'),
+
+    path('test/', views.test, name='test')
+
 ]
 

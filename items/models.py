@@ -6,6 +6,7 @@ from django.db import models
 # IMP : Django follows ORM
 
 class Item(models.Model):
+
             # Defines a class Item that inherits from another class 
             # called Model from models module. 
             # By doing this Item became a Django model, based on which
@@ -21,6 +22,17 @@ class Item(models.Model):
             # Note that max_length is required for CharField()
 
         price = models.IntegerField() # No need of arguments for integer
+
+        def __str__(self):
+            # When you display a Model as a list, Django displays each 
+            # record Member object (1), Member object (2) etc
+            # in admin tool.
+            # Hence we need to set what to display when we print a
+            # model through __str__
+            return f' {self.name} '
+            # But better is to change How fields will be displayed in 
+            # admin tool, using list_display property in admin.py
+            # through MemberAdmin class
 
 # IMP Note :
 

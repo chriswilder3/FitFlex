@@ -53,7 +53,7 @@ def items(request):
               # py manage.py shell, 
 
        items = Item.objects.all().values()       
-       print(items)
+       # print(items)
               # model_name.objects : Django automatically provides a
               # manager object called .objects for all models. Using 
               # it as a handle/ reference to corresponding model/relation
@@ -171,6 +171,20 @@ def item_details( request , id):
        }
        return HttpResponse( template.render( context, request))
 
+def home(request):
+       # Home page of the site
+       template = loader.get_template('index.html')
+   
+       return HttpResponse( template.render())
+
+
+def test( request ):
+       # USed for testing 
+       template = loader.get_template('test.html')
+       context = {
+              'animals': ['tiger', 'monkey','cat','dog']
+       }
+       return HttpResponse( template.render(context, request))
 
 
        

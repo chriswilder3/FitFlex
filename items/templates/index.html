@@ -8,56 +8,60 @@
     <title>FitFlex</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body{
+        .jumbotron{
+            background-image: url('{% static "man_run_sports.png" %}');
+            
+            background-repeat: no-repeat;
+            background-position: bottom;
             
         }
     </style>
 
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
     <div class="nav-bar">
         <nav >
             <ul class="flex flex-row bg-slate-700 
-                text-red-600 text-lg text-center">
+                text-red-600 text-lg text-center font-medium">
 
-                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded-md">
                     <a href="/">Home</a>
                 </li>
-                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded-md">
                     <a href="/items/">Shop</a>
                 </li>
-                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
+                <li class="basis-4 p-3 min-w-20  bg-white mx-3 my-3 border-b-rose-600 rounded-md">
                     <a href="#">About</a>
                 </li>
-                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded">
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded-md">
                     <a href="#">Contact</a>
                 </li>
             </ul>
         </nav>
     </div>
-    <div class="jumbotron p-3 mx-3 
-            bg-[url('{% static 'man_run_sports.png'%}')]">
+    <div class="jumbotron px-5 pt-5 pb-9">
         <h1 class="text-5xl text-red-600 py-4 font-bold">
             FitFlex 
         </h1>
-        <h3 class=" text-3xl py-2">
+        <h3 class=" text-3xl py-2 text-slate-700 ">
             Gear Up for Your Fitness Journey
         </h3>
-        <p class=" py-2 text-xl my-3">
-            An online store specializing in fitness gear, apparel, and accessories to empower health enthusiasts and athletes.
+        <p class=" py-2 text-xl my-3 text-red-500">
+            We offer top tier fitness gear, apparel, and accessories to empower health enthusiasts and athletes.
         </p>
-        <a href="/items" class="bg-red-500 hover:bg-red-300 hover:text-slate-500
-            text-white text-2xl px-2 py-1 mt-3 rounded-md"> 
+        <a href="/items" class="bg-red-500 
+            hover:bg-red-300 hover:text-slate-500 
+            text-white text-2xl px-2 py-1 mt-3 ml-5 rounded-md"> 
             Buy Now
         </a>
     </div>
 
-    <footer class=" bg-orange-200 my-3 bottom-0">
+    <footer class=" bg-orange-200 bottom-0 mt-auto">
         <h3 class=" ml-4 text-xl pt-3">
             Also available in :
         </h3>
-        <div class="flex flex-row justify-center my-3 py-3">
+        <div class="flex flex-row justify-center my-2 py-2">
             <div class="basis-2 mx-3 ">
                 Bangalore 
             </div>

@@ -182,7 +182,10 @@ def test( request ):
        # USed for testing 
        template = loader.get_template('test.html')
        context = {
-              'animals': ['tiger', 'monkey','cat','dog']
+              'animals': ['tiger', 'monkey','cat','dog'],
+              'name' : 'Sachin',
+              'greeting' : 2,
+              'day' : 'Friday',
        }
        return HttpResponse( template.render(context, request))
 

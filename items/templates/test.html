@@ -10,6 +10,7 @@
     <h1>
         Testing..
     </h1>
+    <p> My Name is : {{name}} </p>
     <ul>
         {% for x in animals%}
         <li>
@@ -17,5 +18,37 @@
         </li>
         {% endfor %}
     </ul>
+
+    {% if greeting == 1 %}
+        <h1>Hello</h1>
+    {% elif greeting == 2 %}
+         <h1>Welcome</h1>
+    {% else %}
+        <h1>Goodbye</h1>
+    {% endif %} 
+
+
+
+    
+    {% comment %}
+ filter tag allows you to run a section of code through a filter, 
+    and return it according to the filter keyword
+
+    Filter applies a some sort of filter operation on either the HTML text/
+    Object on which it is applied on.
+
+    Ex: lowercase,uppercase, random , time, first,last , length {% endcomment %}
+    {% filter upper %}
+        sachin is Angry , why?
+    {% endfilter%} 
+            <- SACHIN IS ANGRY , WHY? ->
+
+    {% if greeting == 2 and day == "Friday" %}
+        <h1>Hello Weekend!</h1>
+    {% endif %} 
+
+    
+    
+
 </body>
 </html>

@@ -19,7 +19,7 @@ def sample( request ):     # request object is instance of Http request and
                     # response defaults to "text/html" unless specified.
 
 
-def items(request):
+def sample2(request):
     itemTemplate = loader.get_template('items.html')
                 # Retrieves a template file named items.html located in 
                 # the TEMPLATES directories as configured in the settings.py 
@@ -32,7 +32,7 @@ def items(request):
                 # This string containg HTML content is wrapped as HttpResponse
                 # and passed to browser which will unpack into HTML
 
-                # In further views we will see render() completely
+                # In further views we will see render() completely.
          # render() method takes two arguments:
          
                 # context (optional): A dictionary that contains the 
@@ -43,3 +43,93 @@ def items(request):
                 # object, which provides additional context to the 
                 # template (for things like URL reversing and accessing 
                 # user information).
+
+def items(request):
+
+
+              # Note that we already added data into DB/model using
+              # py manage.py shell, 
+
+       items = Item.objects.all().values()       
+       print(items)
+              # model_name.objects : Django automatically provides a
+              # manager object called .objects for all models. Using 
+              # it as a handle/ reference to corresponding model/relation
+              # We can query/ modify that model/relation. Note that it
+              # is object, dont call it like funcn, use it like this
+              # model_name.objects.all()
+
+              #  QuerySet is a collection of database queries in Django.
+              #  It represents a set of objects (or rows in a database 
+              #  table) that you can retrieve, filter, update, or delete. 
+
+              # .all() : This is queryset method which retrieves all records
+              #  from the DB table. If ur table contains a huge no of rows
+              #  this can be resource-intensive. Combine it with filters 
+              #  or pagination when dealing with large datasets.
+
+              # .values() : Note that all() returns queryset object, which
+              # is displayed like this - <QuerySet [<Item: Item object (1)>]>
+              # Hence to print the actual values of queryset use .values()
+
+              # Op : <QuerySet [{'id': 1, 'name': 'Yoga Matt', 'price': 700}]>
+
+              # Queryset object can be be used to obtain individual column/field
+              # values using . operator, if it has single item.    
+              # item1 = Item( name = 'some_name', price = some_price)          
+              # item1.name , item2.price etc.
+
+              # If there are mulitple items in QuerySet object, just apply indexing
+              # or filtering. First lets use indexing
+              # item3 = Item.objects.all()[3]
+              # item3.name, item3.price
+
+       # CRUD:
+
+          # newItem = Item(name='Workout shirt', price= 500)
+              # This creates new instance of Item model called newItem
+              # In DB, this corresponds to a new row, with given
+              # column field values name, price. The id will be
+              # obviously autoincremented internally.
+          # member.save()
+              # But note that instance just created is in "pending" state
+              # It is not yet attached to Item model itself. .save()
+              # saves this instance to the model/relation.
+
+       # Creating Multiple Elements:
+              # item1 = Item(name = 'Resistance Bands (Set of 5)' , price = 350)   
+              # item2 = Item(name = 'Adjustable Dumbbells (Pair)' , price = 700)     
+              # item3 = Item(name = 'Jump Rope (Speed Training)' , price = 200)      
+              # item_list = [item1, item2, item3]
+              # for x in item_list:
+              #     x.save()
+       # Update
+              # After obtaining individual rows with indexing/filtering, we can 
+              # update them as well by saying x.field= val
+              # item2 = Item.objects.all()[2]
+              # item2.price = 800
+              # Dont forget to save item2.save()
+
+       # Deletion
+              # Again obtain the row u want to delete.
+              # item3 = Item.objects.all()[3]
+              # Apply the .delete() on it. No need to save(). It will
+              # delete from table entirely
+              # item3.delete()
+              # Op : (1, {'items.Item': 1})    # denotes 1 item deleted
+
+       # After performing the modifications, apply migrations
+
+       # Now lets load the model data in the views to send it to the
+              # template.
+       
+              
+
+
+
+
+       
+
+
+
+

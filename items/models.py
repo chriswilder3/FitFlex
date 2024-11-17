@@ -24,7 +24,7 @@ class Item(models.Model):
 
 # IMP Note :
 
-# The name of the table will be derived from the class name,
+# The name of the table will be derived from the appname & class name,
 # converted to lowercase (e.g., item for the Item model). override this
 # behavior by specifying the db_table option inside the model’s Meta class
 

@@ -5,32 +5,88 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Item Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-     <div class="nav-bar">
-        <nav>
-            <ul>
-                <li>
+<body class="flex flex-col min-h-screen">
+      <div class="nav-bar">
+        <nav >
+            <ul class="flex flex-row bg-slate-700 
+                text-red-600 text-lg text-center font-medium">
+
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded-md">
                     <a href="/">Home</a>
                 </li>
-                <li>
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded-md">
                     <a href="/items/">Shop</a>
                 </li>
-                <li>
-                    <a href="#">About us</a>
+                <li class="basis-4 p-3 min-w-20  bg-white mx-3 my-3 border-b-rose-600 rounded-md">
+                    <a href="#">About</a>
                 </li>
-                <li>
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded-md">
                     <a href="#">Contact</a>
                 </li>
             </ul>
         </nav>
     </div>
-    
-    <h1> Item details</h1>
-    <p> Name : {{myitem.name}} </p>
-    <p> Price : {{myitem.price}} </p>
 
-    <p> Back to <a href="/items"> All Items </a></p> 
-        <!-- The above link points exactly to base_url of items app  -->
+    
+
+    <div class="jumbotron p-3 mx-3">
+
+        <p class="text-lg "> Back to 
+        <a href="/items" class="bg-red-500 hover:bg-red-300 hover:text-slate-500
+            text-white text-2xl px-2 py-1 mt-3 rounded-md"> 
+            Browsing </a>
+        </p>
+
+        <div class="item-display grid place-content-center">
+            <h3 class=" text-2xl py-4 text-slate-600 ">
+                {{myitem.name}} 
+            </h3>
+            
+            <p class=" text-2xl py-3 text-slate-600" >
+                Price : Rs. {{myitem.price}} 
+            </p>
+
+            <button class="bg-red-500 hover:bg-red-300 hover:text-slate-500
+                text-white text-xl px-2 py-1 mt-3 rounded-md" id="morebtn"> 
+                More Details
+            </button>
+            
+        </div>
+        <div style="display: none" class="item-more-details p-3 mx-10 my-3 text-center 
+                    bg-slate-300">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat, ad? Sint aliquid dicta minima eligendi quis quasi aperiam id laborum minus animi ducimus, dignissimos iusto sed a repellat omnis. Possimus!
+        </div>
+
+    </div>
+
+    <footer class=" bg-red-100 bottom-0 mt-auto">
+        <h3 class=" ml-4 text-xl pt-3">
+            Also available in :
+        </h3>
+        <div class="flex flex-row justify-center my-3 py-3">
+            <div class="basis-2 mx-3 ">
+                Bangalore 
+            </div>
+            <div class="basis-2 mx-3 ">
+                Mumbai 
+            </div>
+            <div class="basis-2 mx-3 ">
+                Delhi
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        morebtn = document.getElementById('morebtn')
+        morebtn.addEventListener('click', function(){
+
+            morebtn.style.display = 'none';
+            document.querySelector('.item-more-details').style.display = 'contents'
+        })
+    </script>
+
+  
 </body>
 </html>

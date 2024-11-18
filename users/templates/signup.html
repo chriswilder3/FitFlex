@@ -19,40 +19,71 @@
 </head>
 
 <body class="flex flex-col min-h-screen">
-    <div class="jumbotron px-5 pt-5 pb-9">
+
+    <div class="nav-bar">
+        <nav >
+            <ul class="flex flex-row bg-slate-700 
+                text-red-600 text-lg text-center font-medium">
+
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded-md">
+                    <a href="/">Home</a>
+                </li>
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded-md">
+                    <a href="/items/">Shop</a>
+                </li>
+                <li class="basis-4 p-3 min-w-20  bg-white mx-3 my-3 border-b-rose-600 rounded-md">
+                    <a href="#">About</a>
+                </li>
+                <li class="basis-4 p-3 min-w-20 bg-white mx-3 my-3 border-b-rose-600 rounded-md">
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+             
+        </nav>
+    </div>
+
+
+    <div class="jumbotron px-8 py-4 my-4 mx-auto border-2 rounded">
         <h1 class="text-5xl text-red-600 py-4 font-bold">
             Create Account
         </h1>
-        <form action="" method="POST">
+        <form action="" method="POST" class=" px-3 flex flex-col min-w-64 ">
 
-            <label for="name">Enter your full name</label>
-            <input type="text" name="name" id="username">
+            <label class="basis-4 my-2 " for="name">Enter your fullname</label>
+            <input class="basis-4 border-slate-400 p-1 border-2 
+                     focus:border-red-500 mb-2 rounded " type="text" name="name" id="name">
 
-            <label for="username">Enter your username</label>
-            <input type="text" name="username" id="username">
+            <label class="basis-4 my-2 " for="username">Enter your username</label>
+            <input class="basis-4 border-slate-400 p-1 border-2 
+                     focus:border-red-500 mb-2 rounded " type="text" name="username" id="username">
+            
+            <label class="basis-4 my-2 " for="phone">Enter Mobile no</label>
+            <input class="basis-4 border-slate-400 p-1 border-2 
+                     focus:border-red-500 mb-2 rounded " type="number" name="phone" id="phone">
 
-            <label for="phone">Enter your phone no</label>
-            <input type="number" name="phone" id="phone">
-
-            <label for="email">Enter your email</label>
-            <input type="email" name="email" id="email">
-
+            <label class="basis-4 my-2 " for="email">Enter your email</label>
+            <input class="basis-4 border-slate-400 p-1 border-2 
+                     focus:border-red-500 mb-2 rounded " type="email" name="email" id="email">
         
-            <button type="submit" href="/items" class="bg-red-500 
+            <button type="submit" href="/items" class="basis-4 bg-red-500 
                 hover:bg-red-300 hover:text-slate-500 
-                text-white text-2xl px-2 py-1 mt-3 ml-5 rounded"> 
+                text-white text-xl py-1 mt-3 rounded"> 
                 Sign Up
             </button>
         </form>
-        <div class="signup-suggest">
-            <p> Already have an account ?</p>
-            <a  href="/users/signin" class="bg-red-500 
-                hover:bg-red-300 hover:text-slate-500 
-                text-white text-2xl px-2 py-1 mt-3 ml-5 rounded"> 
-                Sign in
+        <div class="signin-suggest flex flex-col max-w-screen-sm m-3">
+            <p class=" basis-2 my-2"> Already have an account ?</p>
+            <a  href="/users/signin" class="basis-2 border-2  
+                hover:bg-slate-200 hover:text-slate-500 text-center
+                 text-xl px-3 text-red-400 py-1 rounded"> 
+                Login
             </a>
         </div>
     </div>
+
+
+
+
 
     <footer class=" bg-red-100 bottom-0 mt-auto">
         <h3 class=" ml-4 text-xl pt-3">

@@ -52,7 +52,7 @@
         <h1 class="text-5xl text-red-600 py-4 font-bold">
             Create Account
         </h1>
-        <form action="" method="POST" class=" px-3 flex flex-col min-w-64 ">
+        <form action="/users/signup" method="POST" class=" px-3 flex flex-col min-w-64 ">
 
             <label class="basis-4 my-2 " for="name">Enter your fullname</label>
             <input class="basis-4 border-slate-400 p-1 border-2 
@@ -62,13 +62,17 @@
             <input class="basis-4 border-slate-400 p-1 border-2 
                      focus:border-red-500 mb-2 rounded " type="text" name="username" id="username">
             
-            <label class="basis-4 my-2 " for="phone">Enter Mobile no</label>
+            <label class="basis-4 my-2 " for="phone">Enter mobile number</label>
             <input class="basis-4 border-slate-400 p-1 border-2 
                      focus:border-red-500 mb-2 rounded " type="number" name="phone" id="phone">
 
             <label class="basis-4 my-2 " for="email">Enter your email</label>
             <input class="basis-4 border-slate-400 p-1 border-2 
                      focus:border-red-500 mb-2 rounded " type="email" name="email" id="email">
+            
+            <label class="basis-4 my-2 " for="password">Enter your password</label>
+            <input class="basis-4 border-slate-400 p-1 border-2 
+                     focus:border-red-500 mb-2 rounded " type="password" name="password" id="password">
         
             <button type="submit" href="/items" class="basis-4 bg-red-500 
                 hover:bg-red-300 hover:text-slate-500 
@@ -86,7 +90,13 @@
         </div>
     </div>
 
-
+    <div class="dummyform">
+        <form action="/users/signup">
+            {% csrf_token %}
+            {{ signUpForm}}
+            <input type="submit" value="submit">
+        </form>
+    </div>
 
 
 

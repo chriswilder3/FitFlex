@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.core.validators import MinLenthValidator, RegexValidator
+from django.core.validators import MinLengthValidator, RegexValidator
 # Create your models here.
 
 class User( models.Model):
@@ -12,7 +12,7 @@ class User( models.Model):
     phone = models.CharField( 
         max_length= 10,
         validators = [
-            MinLenthValidator(10),
+            MinLengthValidator(10),
             RegexValidator(
                 regex = r'^\d{10}',
                 message = 'Phone no must be exact 10 digits'

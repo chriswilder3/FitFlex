@@ -21,4 +21,6 @@ urlpatterns = [
     path('', include('items.urls')),  # it sets base url of items app to ''
                     # remember include takes in a string.
     path('admin/', admin.site.urls),
+
+    path('users/', include('users.urls')),
 ]

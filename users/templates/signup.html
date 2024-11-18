@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFlex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .jumbotron{
+            {% comment %} background-image: url('{% static "man_run_sports.png" %}'); {% endcomment %}
+            
+            background-repeat: no-repeat;
+            background-position: bottom;
+            
+        }
+    </style>
+
+</head>
+
+<body class="flex flex-col min-h-screen">
+    <div class="jumbotron px-5 pt-5 pb-9">
+        <h1 class="text-5xl text-red-600 py-4 font-bold">
+            Create Account
+        </h1>
+        <form action="" method="POST">
+
+            <label for="name">Enter your full name</label>
+            <input type="text" name="name" id="username">
+
+            <label for="username">Enter your username</label>
+            <input type="text" name="username" id="username">
+
+            <label for="phone">Enter your phone no</label>
+            <input type="number" name="phone" id="phone">
+
+            <label for="email">Enter your email</label>
+            <input type="email" name="email" id="email">
+
+        
+            <button type="submit" href="/items" class="bg-red-500 
+                hover:bg-red-300 hover:text-slate-500 
+                text-white text-2xl px-2 py-1 mt-3 ml-5 rounded"> 
+                Sign Up
+            </button>
+        </form>
+        <div class="signup-suggest">
+            <p> Already have an account ?</p>
+            <a  href="/users/signin" class="bg-red-500 
+                hover:bg-red-300 hover:text-slate-500 
+                text-white text-2xl px-2 py-1 mt-3 ml-5 rounded"> 
+                Sign in
+            </a>
+        </div>
+    </div>
+
+    <footer class=" bg-red-100 bottom-0 mt-auto">
+        <h3 class=" ml-4 text-xl pt-3">
+            Also available in :
+        </h3>
+        <div class="flex flex-row justify-center my-2 py-2">
+            <div class="basis-2 mx-3 ">
+                Bangalore 
+            </div>
+            <div class="basis-2 mx-3 ">
+                Mumbai 
+            </div>
+            <div class="basis-2 mx-3 ">
+                Delhi
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+</html>

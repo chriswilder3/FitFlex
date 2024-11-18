@@ -2,13 +2,15 @@ from django.shortcuts import render
 
 from django.template import loader
 
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 from .forms import SignUpForm
 
+from .models import User
+
 # Create your views here.
 
-def signup(request):
+def signupdummy(request):
     # Note that view functions are able handle both GET/ POST requests.
     # GET : when the page is first loaded, showing an empty form. We need
             # Inject form along with template as response
@@ -31,9 +33,13 @@ def signup(request):
             # Since its true, validated data will be in 
             # form_instance.cleaned_data variable
 
+            # Lets just print it : 
+            print(submittedForm.cleaned_data)
+
             # After obtaining and processing this data internally, we
             # can redirect the page to another with HttpResponseRedirect
-            HttpResponseRedirect( '/users/user_dashboard')
+            return HttpResponseRedirect( '/users/signup')
+            # Remember we have to return the above object.
     else:
         # If the request was not POST, then it was GET( since only 2 
         # possible for forms). It means the page is being requested for
@@ -50,15 +56,44 @@ def signup(request):
                 # Now Go to signup.html and enter {{signUpForm}} to
                 # generate this form there.
                 # Just add structure similar to this : 
-                # <form action="/users/signup" method="post">
+                # <form action="/users/signup/" method="post">
                 #     {% csrf_token %}
                 #     {{ signUpForm }}
                 #     <input type="submit" value="Submit">
                 # </form>
+                #  Remember wherever POST is sent to. dont
+                # forget / at the end of link in the method of forms in html
 
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            userData = form.cleaned_data
+            print(userData)
+            # {{'name': 'sachin', 'username': 'sachin'...}
+            # Hence its a dictionary, Now lets load up the Django model
+            # User and push this data to the user, so that we can verify 
+            # later during sign in.
+            # Note that User in the model, and 
+            x = User(name = userData['name'],
+                    username = userData['username'],
+                    email = userData['email'],
+                    phone = userData['phone'],
+                    password = userData['password'])
+            x.save()
+            users = User.objects.all().values()
+            print(users)
+            return HttpResponseRedirect('/users/signup/')
+        else:
+            # If the form is invalid, just render the form with errors
+            # But I found a variable with all errors
+            print( form.errors)
+            return render(request, 'signup.html', 
+                        {'form': form,'error': 1 })
+    else:
+        form = SignUpForm()
+        return render( request, 'signup.html',{'form': form, 'error':0})
 
 def signin(request):
-    signInTemplate = loader.get_template('signin.html')
-
-    return HttpResponse( signInTemplate.render() )
-
+    return render( request, 'signin.html')

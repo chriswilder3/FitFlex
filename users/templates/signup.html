@@ -9,11 +9,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .jumbotron{
-            {% comment %} background-image: url('{% static "man_run_sports.png" %}'); {% endcomment %}
             
             background-repeat: no-repeat;
             background-position: bottom;
-            
+        }
+        form p{
+            @apply text-red-600
         }
     </style>
 
@@ -48,7 +49,7 @@
     </div>
 
 
-    <div class="jumbotron px-8 py-4 my-4 mx-auto border-2 rounded">
+    {% comment %} <div class="jumbotron px-8 py-4 my-4 mx-auto border-2 rounded">
         <h1 class="text-5xl text-red-600 py-4 font-bold">
             Create Account
         </h1>
@@ -88,15 +89,67 @@
                 Login
             </a>
         </div>
-    </div>
+    </div> {% endcomment %}
 
-    <div class="dummyform">
-        <form action="/users/signup">
-            {% csrf_token %}
-            {{ signUpForm}}
-            <input type="submit" value="submit">
-        </form>
+    <!-- {% if error == 1%}
+        <p class="text-red-500"> Incorrect Form Details</p>
+    {% endif %} -->
+
+    <div class="jumbotron px-8 py-4 my-4 mx-auto border-2 rounded">
+        <h1 class="text-5xl text-red-600 py-4 font-bold">
+            Create Account
+        </h1>
+        
+
+    <form action="/users/signup/" method="POST" class="px-3 flex flex-col min-w-64">
+        {% csrf_token %}
+
+        <label class="basis-4 my-2" for="name">{{ form.name.label }}</label>
+        {{ form.name }}
+        {% if form.name.errors %}
+            <span class="text-red-500 text-sm">{{ form.name.errors }}</span>
+        {% endif %}
+
+        <label class="basis-4 my-2" for="username">{{ form.username.label }}</label>
+        {{ form.username }}
+        {% if form.username.errors %}
+            <span class="text-red-500 text-sm">{{ form.username.errors }}</span>
+        {% endif %}
+
+        <label class="basis-4 my-2" for="phone">{{ form.phone.label }}</label>
+        {{ form.phone }}
+        {% if form.phone.errors %}
+            <span class="text-red-500 text-sm">{{ form.phone.errors }}</span>
+        {% endif %}
+
+        <label class="basis-4 my-2" for="email">{{ form.email.label }}</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+            <span class="text-red-500 text-sm">{{ form.email.errors }}</span>
+        {% endif %}
+
+        <label class="basis-4 my-2" for="password">{{ form.password.label }}</label>
+        {{ form.password }}
+        {% if form.password.errors %}
+            <span class="text-red-500 text-sm">{{ form.password.errors }}</span>
+        {% endif %}
+
+        <button type="submit" href="/items" class="basis-4 bg-red-500 
+            hover:bg-red-300 hover:text-slate-500 
+            text-white text-xl py-1 mt-3 rounded"> 
+            Sign Up
+        </button>
+    </form>
+        <div class="signin-suggest flex flex-col max-w-screen-sm m-3">
+            <p class=" basis-2 my-2"> Already have an account ?</p>
+            <a  href="/users/signin" class="basis-2 border-2  
+                hover:bg-slate-200 hover:text-slate-500 text-center
+                 text-xl px-3 text-red-400 py-1 rounded"> 
+                Login
+            </a>
+        </div>
     </div>
+  
 
 
 

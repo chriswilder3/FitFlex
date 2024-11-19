@@ -51,11 +51,11 @@
             Sign In
         </h1>
 
-        {% if error == 1%}
-            <span class=" text-red-500 my-2"> Wrong credentials </span>
+        {% if error != 0 %}
+            <span class=" text-red-500 my-2"> Wrong credentials {{error}} </span>
         {% endif %}
         
-        <form action="" method="POST" class=" p-3 flex flex-col min-w-64 ">
+        <form action="/users/signin/" method="post" class=" p-3 flex flex-col min-w-64 ">
             {% csrf_token %}
             <label class="basis-4 mt-2 " for="username">{{form.username.label}}</label>
             {{ form.username}}

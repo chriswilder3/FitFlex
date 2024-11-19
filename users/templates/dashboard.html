@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFlex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .jumbotron{
+            
+            background-repeat: no-repeat;
+            background-position: bottom;
+            
+        }
+    </style>
+
+</head>
+
+<body class="flex flex-col min-h-screen">
+    <div class="nav-bar bg-slate-950 py-3 ">
+        <nav >
+            <ul class="flex items-center text-white text-lg font-medium">
+                <!-- Navigation Links -->
+                <li class="flex-none text-center px-3 py-1 mx-3 rounded">
+                  <a href="/">  <img src="{% static 'fitflex.png' %}" width="100px" height="80px" style="background-size: contain;"alt="">
+                  </a>
+                </li>
+                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 ">
+                    <a href="/items/">Shop</a>
+                </li>
+                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 ">
+                    <a href="#">About</a>
+                </li>
+                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 ">
+                    <a href="#">Contact</a>
+                </li>
+
+                <!-- Login Button -->
+                <li class="flex-none text-center ml-auto px-3 py-1 bg-white text-slate-600 mx-3 rounded-md">
+                    <a href="/users/signin"> {{userinfo.username}}</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="jumbotron px-5 pt-5 pb-9">
+        <h1 class="text-5xl text-red-600 py-4 font-bold">
+            FitFlex 
+        </h1>
+        <h3 class=" text-3xl py-2 text-slate-700 ">
+            Welcome User,
+        </h3>
+        <p class=" py-2 text-xl my-3 text-red-500">
+            We offer top tier fitness gear, apparel, and accessories to empower health enthusiasts and athletes.
+        </p>
+        <a href="/items" class="bg-red-500 
+            hover:bg-red-300 hover:text-slate-500 
+            text-white text-2xl px-2 py-1 mt-3 ml-5 rounded-md"> 
+            Buy Now
+        </a>
+    </div>
+
+    <footer class=" bg-red-100 bottom-0 mt-auto">
+        <h3 class=" ml-4 text-xl pt-3">
+            Also available in :
+        </h3>
+        <div class="flex flex-row justify-center my-2 py-2">
+            <div class="basis-2 mx-3 ">
+                Bangalore 
+            </div>
+            <div class="basis-2 mx-3 ">
+                Mumbai 
+            </div>
+            <div class="basis-2 mx-3 ">
+                Delhi
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

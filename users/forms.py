@@ -2,6 +2,10 @@ from django import forms
         # forms is a Django package that contains Form class.
 
 from .models import User
+
+from django.contrib.auth.forms import UserCreationForm
+
+from django.contrib.auth.models import User as AuthUser
     
 # We know that HTML has forms, But provide more security, management toit
 # We rely on Django. In addition, since Django is the backend, through
@@ -81,7 +85,7 @@ class SignUpForm( forms.Form):
     # Naming conventions : clean_<field_name>
     def clean_username( self ):
         form_user_name = self.cleaned_data.get('username')
-        if User.objects.filter( username = form_user_name).exists():
+        if AuthUser.objects.filter(username = form_user_name).exists():
             # If the username specified in the form already exist
             # in the DB. then its a duplicate, Hence throw error
             raise forms.ValidationError('Username is already taken')
@@ -110,6 +114,12 @@ class SignInForm( forms.Form ):
         , required = True
         )
 
+class SampleForm( UserCreationForm):
+    email = forms.EmailField( required = True)
+
+    class Meta:
+        model = AuthUser
+        fields = ['username', 'email', 'password']
 
     
 

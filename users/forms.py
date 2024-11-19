@@ -1,6 +1,7 @@
 from django import forms
         # forms is a Django package that contains Form class.
 
+from .models import User
     
 # We know that HTML has forms, But provide more security, management toit
 # We rely on Django. In addition, since Django is the backend, through
@@ -76,6 +77,25 @@ class SignUpForm( forms.Form):
         , widget = signUpFormInput()
         , required = True
     )
+    # Remember Form Validation methods must follow following
+    # Naming conventions : clean_<field_name>
+    def clean_username( self ):
+        form_user_name = self.cleaned_data.get('username')
+        if User.objects.filter( username = form_user_name).exists():
+            # If the username specified in the form already exist
+            # in the DB. then its a duplicate, Hence throw error
+            raise forms.ValidationError('Username is already taken')
+        return form_user_name
+    
+    def clean_phone( self ):
+        form_phone = self.cleaned_data.get('phone')
+        if User.objects.filter( phone = form_phone).exists():
+            raise forms.ValidationError('Phone no is already taken')
+        if len(form_phone) != 10:
+            raise forms.ValidationError('Phone no length must be 10 ')
+
+        return form_phone
+
 
 
 class SignInForm( forms.Form ):

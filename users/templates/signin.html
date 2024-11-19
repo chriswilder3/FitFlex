@@ -50,10 +50,18 @@
         <h1 class="text-5xl text-red-600 pt-4 font-bold">
             Sign In
         </h1>
+
+        {% if error == 1%}
+            <span class=" text-red-500 my-2"> Wrong credentials </span>
+        {% endif %}
+        
         <form action="" method="POST" class=" p-3 flex flex-col min-w-64 ">
-            <label class="basis-4 mt-2 " for="username">Enter your username</label>
-            <input class="basis-4 border-slate-400 p-1 border-2 
-                     focus:border-red-500 my-2 rounded " type="text" name="username" id="username">
+            {% csrf_token %}
+            <label class="basis-4 mt-2 " for="username">{{form.username.label}}</label>
+            {{ form.username}}
+
+            <label class="basis-4 mt-2 " for="password">{{form.password.label}}</label>
+            {{ form.password}}
         
             <button type="submit" href="/items" class="basis-4 bg-red-500 
                 hover:bg-red-300 hover:text-slate-500 

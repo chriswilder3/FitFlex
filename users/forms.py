@@ -55,24 +55,40 @@ class signUpFormInput( forms.TextInput):
 class SignUpForm( forms.Form):
     name = forms.CharField( label = 'Enter Your name '
            , max_length = 255
-           , widget = signUpFormInput())
+           , widget = signUpFormInput(), required = True)
 
     username = forms.CharField( label = 'Enter user name '
            , max_length = 255
-           , widget = signUpFormInput())
+           , widget = signUpFormInput(),required = True)
 
     phone = forms.CharField( label= 'Enter the mobile no '
         , max_length = 10
         , widget = signUpFormInput()
+        , required = True
     )
 
     email = forms.EmailField( label = ' Enter your email '
         , widget = signUpFormInput()
+        , required = True
     )
 
     password = forms.CharField( label = ' Enter your password '
         , widget = signUpFormInput()
+        , required = True
     )
+
+
+class SignInForm( forms.Form ):
+    username = forms.CharField( max_length = 255
+        , label = 'Enter the username'
+        , widget = signUpFormInput() # The styling we will give same.
+        , required = True
+        )
+    password = forms.CharField( 
+          label ='Enter your Password'
+        , widget = signUpFormInput() 
+        , required = True
+        )
 
 
     

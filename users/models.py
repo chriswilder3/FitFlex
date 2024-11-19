@@ -6,8 +6,9 @@ from django.core.validators import MinLengthValidator, RegexValidator
 class User( models.Model):
 
     name = models.CharField( max_length = 255)
-    username = models.CharField( max_length = 255)
-    email = models.EmailField()
+    username = models.CharField( max_length = 255
+                , unique = True, null = False)
+    email = models.EmailField( null = False)
     address = models.TextField()
     phone = models.CharField( 
         max_length= 10,
@@ -20,7 +21,8 @@ class User( models.Model):
         ],
         unique = True
     )
-    password= models.CharField( max_length = 255)
+    password= models.CharField( max_length = 255,
+                                 null = False)
 
     def __str__(self):
         return f' {self.name} '

@@ -4,7 +4,7 @@ from django.template import loader
 
 from django.http import HttpResponseRedirect
 
-from .forms import SignUpForm
+from .forms import SignUpForm, SignInForm
 
 from .models import User
 
@@ -96,4 +96,34 @@ def signup(request):
         return render( request, 'signup.html',{'form': form, 'error':0})
 
 def signin(request):
-    return render( request, 'signin.html')
+    if request.method == 'POST': # POST must be str her
+        form = SignInForm( request.POST )
+        if form.is_valid():
+            formData = form.cleaned_data
+            username = formData['username']
+            password = formData['password']
+            user_object = User.objects.all().values()
+            print( type(user_object))
+            print( user_object[0]['name'])
+            unameExists = False
+            for x in user_object:
+                #print( x['name'],x['password'])
+                if username == x['username']:
+                    unameExists = True
+                    if password != x['password']:
+                        # wrong password
+                        print('wrong password')
+                        return render(render, 'signin.html', {'form':form, 'error':1})
+                    else:
+                         # successful form
+                        print('success login')
+                        return HttpResponseRedirect('/users/signin/')
+            # username doesnt exist
+            return render( request, 'signin.html', {'form':form, 'error':1})
+        else:
+            # form validation fail
+            return render( request, 'signin.html', {'form':form, 'error':1})
+    else:
+        # Request is GET/ first time visit
+        form = SignInForm()
+        return render( request, 'signin.html', {'form': form, 'error':0})

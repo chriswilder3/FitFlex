@@ -7,8 +7,10 @@
     <title>Sample</title>
 </head>
 <body>
-    <form action="/users/sample/" method ='post'>
-        {{form}}
+    <form action="/users/sample/" method ='POST'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign Up</button>
     </form>
 </body>
 </html>

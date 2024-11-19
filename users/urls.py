@@ -5,7 +5,10 @@ urlpatterns = [
     path('signin/', views.signin, name = 'signin'),
     path('signup/', views.signup, name = 'signup'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('sample', views.sample, name='sample'),
-    path('login/', views.login_view, name='login'),
-    path('dashboard/', views.dashboard_view, name='dashboard')
+   
 ]
+
+
+# path('sample/', views.sample, name='sample'),
+# path('login/', views.login_view, name='login'),
+# path('dashboard/', views.dashboard_view, name='dashboard')

@@ -16,7 +16,7 @@ from django.contrib.auth.models import User as AuthUser
     # For authentication model we cant use the same name
     # So lets rename it to AuthUser
 
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 
@@ -75,90 +75,118 @@ def signupdummy(request):
                 # forget / at the end of link in the method of forms in html
 
 
+
+# def signup(request):
+#     if request.method == 'POST':
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             formData = form.cleaned_data
+#             print(formData)
+#             # {{'name': 'sachin', 'username': 'sachin'...}
+#             # Hence its a dictionary, Now lets load up the Django model
+#             # User and push this data to the user, so that we can verify 
+#             # later during sign in.
+#             # Note that User in the model, and 
+#             # x = User(name = formData['name'],
+#             #         username = formData['username'],
+#             #         email = formData['email'],
+#             #         phone = formData['phone'],
+#             #         password =  make_password(formData['password']) )
+#             # x.save()
+#             # Now we also need to login into Django auth system
+#             # Which is able to handle auth and session tasks
+#             # Note that auth object User(AuthUser here) is also
+#             # a special ORM model created by django to store
+#             # info of users into DB. Hence we can apply
+#             # ORM operations to CRUD on it.
+
+#             # auth.User API :
+#             # Note that auth.User class has following attributes.
+#             # username, password, email, first_name, last_name
+#             # So best way to create users is to use
+#             # create_user() helper function , pass these params to it.
+
+#             newUser = AuthUser.objects.create_user(
+#                 first_name = formData['name'],
+#                 # Since We in form we took the whole name, we
+#                 # will assign it to first_name and ignore last_name attr
+
+#                 username = formData['username'],
+#                 email = formData['email'],
+#                 password = make_password(formData['password'])
+#             )
+#             newUser.save()
+#             # Now that we have the credentials. We need to authenticate
+#             # and login like in signin to go to the user dashboard
+
+#             # Authenticating/Login :
+#             #  syntax : user = authenticate(request=None, **credentials)
+#             # We can use it to verify a set of credentials and takes them
+#             # as kwarguments, generally 2 things :username, password.
+#             # It checks the credentials against auth backends. The auth 
+#             # backends are different kind of authentication services.
+#             # We can use either normal django ones or third party auth backends.
+#             # If credentials are valid for a backend, then an auth.User is
+#             # returned , other wise PermissionDenied is raised and None is returned
+#             # Hence we can use this as login point also.
+
+#             # authenticated_user = authenticate( username = formData['username'] 
+#             #         , password = formData['password'] )
+#             # print('auth happ')
+#             # Now we need to login this authenticated user.
+#             # Note that Django uses sessions and middleware to hook the
+#             # authentication system into request objects.
+
+#             # To log the user in,We use login(), which takes the request
+#             # object and authenticated User object as param. login() saves
+#             # the user’s ID in the session, using Django’s session framework
+
+#              # if returned user object in NOT None
+#             login( request, newUser)
+#                 # Now redirect to success page, which is dashboard for us.
+#             return redirect('/users/dashboard/')
+            
+#             # Note that login, logout, authenticate all three must be
+#             # imported from django.contrib.auth
+
+#         else:
+#             # If the form is invalid, just render the form with errors
+#             # But I found a variable with all errors
+#             print( form.errors)
+#             return render(request, 'signup.html', 
+#                         {'form': form,'error': 1 })
+#     else:
+#         form = SignUpForm()
+#         return render( request, 'signup.html',{'form': form, 'error':0})
+# 
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             formData = form.cleaned_data
-            print(formData)
-            # {{'name': 'sachin', 'username': 'sachin'...}
-            # Hence its a dictionary, Now lets load up the Django model
-            # User and push this data to the user, so that we can verify 
-            # later during sign in.
-            # Note that User in the model, and 
-            # x = User(name = formData['name'],
-            #         username = formData['username'],
-            #         email = formData['email'],
-            #         phone = formData['phone'],
-            #         password =  make_password(formData['password']) )
-            # x.save()
-            # Now we also need to login into Django auth system
-            # Which is able to handle auth and session tasks
-            # Note that auth object User(AuthUser here) is also
-            # a special ORM model created by django to store
-            # info of users into DB. Hence we can apply
-            # ORM operations to CRUD on it.
-
-            # auth.User API :
-            # Note that auth.User class has following attributes.
-            # username, password, email, first_name, last_name
-            # So best way to create users is to use
-            # create_user() helper function , pass these params to it.
-
+            # Create new user with hashed password
             newUser = AuthUser.objects.create_user(
-                first_name = formData['name'],
-                # Since We in form we took the whole name, we
-                # will assign it to first_name and ignore last_name attr
-
-                username = formData['username'],
-                email = formData['email'],
-                password = make_password(formData['password'])
+                first_name=formData['name'],
+                username=formData['username'],
+                email=formData['email'],
+                password=formData['password']  # Note: create_user hashes the password automatically
             )
             newUser.save()
-            # Now that we have the credentials. We need to authenticate
-            # and login like in signin to go to the user dashboard
-
-            # Authenticating/Login :
-            #  syntax : user = authenticate(request=None, **credentials)
-            # We can use it to verify a set of credentials and takes them
-            # as kwarguments, generally 2 things :username, password.
-            # It checks the credentials against auth backends. The auth 
-            # backends are different kind of authentication services.
-            # We can use either normal django ones or third party auth backends.
-            # If credentials are valid for a backend, then an auth.User is
-            # returned , other wise PermissionDenied is raised and None is returned
-            # Hence we can use this as login point also.
-
-            authenticated_user = authenticate( username = formData['username'] 
-                    , password = formData['password'] )
-            print('auth happ')
-            # Now we need to login this authenticated user.
-            # Note that Django uses sessions and middleware to hook the
-            # authentication system into request objects.
-
-            # To log the user in,We use login(), which takes the request
-            # object and authenticated User object as param. login() saves
-            # the user’s ID in the session, using Django’s session framework
-
-            if authenticated_user: # if returned user object in NOT None
-                login( request, authenticated_user)
-                # Now redirect to success page, which is dashboard for us.
-                return redirect('/users/dashboard/')
-            else:
-                print(' signup failed')
-                return redirect('/users/dashboard/')
-            # Note that login, logout, authenticate all three must be
-            # imported from django.contrib.auth
-
+            # Authenticate and login the new user
+            authenticated_user = authenticate(username=formData['username'], password=formData['password'])
+            if authenticated_user:
+                login(request, authenticated_user)
+                return redirect('/users/dashboard/')            
+            # If authentication fails, show an error
+            return render(request, 'signup.html', {'form': form, 'error': 'Authentication failed'})
         else:
-            # If the form is invalid, just render the form with errors
-            # But I found a variable with all errors
-            print( form.errors)
-            return render(request, 'signup.html', 
-                        {'form': form,'error': 1 })
+            # If the form is invalid, render the form with errors
+            return render(request, 'signup.html', {'form': form, 'error': form.errors})    
     else:
         form = SignUpForm()
-        return render( request, 'signup.html',{'form': form, 'error':0})
+        return render(request, 'signup.html', {'form': form, 'error': 0})
+
 
 # def signin(request):
 #     if request.method == 'POST': # POST must be str her
@@ -212,15 +240,18 @@ def signin(request):
             formData = form.cleaned_data
             username = formData['username']
             password = formData['password']
-            password = make_password(password)
-            u = AuthUser.objects.get(username = username)
-            print(u)
+            print(username)
+            print(password)
             try:
                 authenticated_user = authenticate(username=username, password=password)
+                print(authenticated_user)
+                print('in')
                 if authenticated_user:
+                    print('succ')
                     login(request, authenticated_user)
                     return redirect('/users/dashboard/')
                 else:
+                    print('fail')
                     return render(request, 'signin.html', {'form': form, 'error': 1})
             except AuthUser.DoesNotExist:
                 return render(request, 'signin.html', {'form': form, 'error': 1})
@@ -229,6 +260,41 @@ def signin(request):
         # Request is GET/ first time visit
         form = SignInForm()
         return render( request, 'signin.html', {'form': form, 'error':0})
+
+# def signin(request):
+#     if request.method == 'POST':
+#         form = SignInForm(request.POST)
+#         if form.is_valid():
+#             formData = form.cleaned_data
+#             username = formData['username']
+#             password = formData['password']
+
+#             try:
+#                 u = AuthUser.objects.get(username=username)
+#                 if check_password(password, u.password):
+#                     print("Password matches!")
+#                 else:
+#                     print("Password does not match.")
+#                     return render(request, 'signin.html', {'form': form, 'error': 'Password does not match'})
+
+#                 authenticated_user = authenticate(username=username, password=password)
+#                 if authenticated_user:
+#                     login(request, authenticated_user)
+#                     return redirect('/users/dashboard/')
+#                 else:
+#                     return render(request, 'signin.html', {'form': form, 'error': 'Authentication failed'})
+#             except AuthUser.DoesNotExist:
+#                 return render(request, 'signin.html', {'form': form, 'error': 'User does not exist'})
+#         else:
+#             # If the form is invalid, just render the form with errors
+#             # But I found a variable with all errors
+#             print( form.errors)
+#             return render(request, 'signup.html', 
+#                         {'form': form,'error': 1 })
+#     else:
+#         form = SignInForm()
+#         return render(request, 'signin.html', {'form': form, 'error': 0})
+
 
 def dashboard( request):
 
@@ -272,33 +338,35 @@ def dashboard( request):
     #     #do something
 
 
-def sample( request):
-    if request.method == 'POST':
-        form = SampleForm( request.POST)
-        if form.is_valid():
-            user.save()
-            login( request, user)
-            return redirect('/users/dashboard/')
-        else:
-            return redirect('/users/sample/')
+# def sample( request):
+#     if request.method == 'POST':
+#         form = SampleForm( request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             login( request, user)
+#             print('succes')
+#             return redirect('/users/dashboard/')
+#         else:
+#             print('failed')
+#             return redirect('/users/sample/')
 
-    else:
-        form = SampleForm()
-        return render( request, 'sample.html', { 'form':form})
+#     else:
+#         form = SampleForm()
+#         return render( request, 'sample.html', { 'form':form})
 
 
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('dashboard')  # Redirect to the user dashboard
-        else:
-            return render(request, 'login.html', {'error': 'Invalid credentials'})
-    return render(request, 'login.html')
+# def login_view(request):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password = request.POST['password']
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return redirect('dashboard')  # Redirect to the user dashboard
+#         else:
+#             return render(request, 'login.html', {'error': 'Invalid credentials'})
+#     return render(request, 'login.html')
 
-@login_required
-def dashboard_view(request):
-    return render(request, 'dashboard.html')
+# @login_required
+# def dashboard_view(request):
+#     return render(request, 'dashboard.html')

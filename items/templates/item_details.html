@@ -22,13 +22,25 @@
             </h3>
             
             <p class=" text-2xl py-3 text-slate-600" >
-                Price : Rs. {{myitem.price}} 
+                 Rs. {{myitem.price}} 
             </p>
+                <p>
+                    {{myitem.description}}
+                </p>
 
-            <button class="bg-red-500 hover:bg-red-300 hover:text-slate-500
-                text-white text-xl px-2 py-1 mt-3 rounded-md" id="morebtn"> 
-                More Details
-            </button>
+            <img src="{{ myitem.image.url}}" alt="" width="400" height="300">
+
+            <div class="flex-row justify-center">
+                <button class="flex-none bg-orange-300 border-2 border-orange-600 hover:bg-yellow-300 hover:text-slate-500
+                text-slate-800 text-xl px-3 py-2 mt-3 rounded-full" id="morebtn"> 
+                Buy now
+                </button>
+                
+                <button class="flex-none bg-orange-300 hover:bg-yellow-300 hover:text-slate-500
+                text-slate-800 text-xl px-3 py-2 mt-3 rounded-full" id="morebtn"> 
+                Add to Cart
+                </button> 
+            </div>
             
         </div>
         <div style="display: none" class="item-more-details p-3 mx-10 my-3 text-center 

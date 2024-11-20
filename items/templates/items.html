@@ -14,11 +14,12 @@
         <ul class="flex flex-row flex-wrap m-3 text-red-500 ">
             {% for x in myitems%}
 
-            <a  class=" basis-4" href="item_details/{{x.id}} "> 
-                <li class=" min-w-28 p-4 mx-3 min-h-32 bg-red-100 
-                            hover:bg-red-200 active:bg-red-300 rounded-md"> 
+            <a  class=" basis-4 py-4 " href="item_details/{{x.id}} "> 
+                <li class=" min-w-32 p-4 mx-3 min-h-32 bg-red-100 
+                            hover:bg active:bg-red-300 rounded-md"> 
 
                     {{x.name}}   
+                    <img width ='120px' height='100px', src=" {{ x.image.url }}" alt="">
                 </li>
             </a> 
                 
@@ -28,10 +29,10 @@
             {% endfor %}
         </ul>
 
-        <a href="#" class="bg-red-500 hover:bg-red-300 hover:text-slate-500
+        <!-- <a href="#" class="bg-red-500 hover:bg-red-300 hover:text-slate-500
             text-white text-2xl px-2 py-1 mt-3 rounded-md"> 
             More
-        </a>
+        </a> -->
     </div>
 
 {% endblock%}

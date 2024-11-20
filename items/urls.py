@@ -2,6 +2,14 @@ from django.urls import path
              # path is a function provided by Django to define URL patterns
 from . import views 
 
+from django.conf import settings # Need this to set url where 
+                                   # product/item images will be retreived 
+                                   # from
+
+from django.conf.urls.static import static # need this for setting
+                            # the url which can be used for
+                            #  accessing the images in template later.
+
 urlpatterns = [
     # The urlpatterns list is a mandatory variable in a Django app that 
     # contains all the URL-to-view mappings.
@@ -28,4 +36,9 @@ urlpatterns = [
     path('test/', views.test, name='test')
 
 ]
+
+
+if settings.DEBUG:
+       urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
 

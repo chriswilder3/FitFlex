@@ -12,6 +12,8 @@ from django.template import loader
 
 from .models import Item # Import the Item class from the models file
 
+
+
 # Create your views here.
 def sample( request ):     # request object is instance of Http request and
                     # contains infn like method(GET),headers,query params etc
@@ -193,6 +195,7 @@ def test( request ):
               'day' : 'Friday',
        }
        return HttpResponse( template.render(context, request))
+
 
 
        

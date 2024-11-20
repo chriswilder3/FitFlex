@@ -31,7 +31,7 @@ class Item(models.Model):
 
         item_type = models.CharField( max_length = 255, blank = True)
 
-        image = models.ImageField( blank= True)
+        image = models.ImageField( upload_to='product_images/',blank= True)
 
         def __str__(self):
             # When you display a Model as a list, Django displays each 

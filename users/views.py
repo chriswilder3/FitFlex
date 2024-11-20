@@ -309,18 +309,19 @@ def dashboard( request):
     # If the current user has not logged in, this attribute will be set 
     # to an instance of AnonymousUser, otherwise it will be an instance
     #  of User (AuthUser in our case).
-
-    if request.user.is_authenticated:
+    user = request.user
+    if user.is_authenticated:
         # User is now on his dashboard. But we also need
         # to pass userinfo to it. But note that, We only
         # need to get hold of the username to know everything abt him
         # since usernames are unique.
         # Hence lets fetch, username and pass it to the user to
         # be printed.
-        print(request.user)
+        print(user)
         context ={
-            'userinfo': request.user,
+            'userinfo': user,
         }
+        print(user.username)
         return render( request, 'dashboard.html', context)
         
     else:

@@ -17,45 +17,39 @@
         </p>
 
         <div class="item-display grid place-content-center">
-            <h3 class=" text-2xl py-4 text-slate-600 ">
+            <h3 class=" text-3xl py-4 text-slate-600 ">
                 {{myitem.name}} 
             </h3>
             
+            <img class="border-2 " src="{{ myitem.image.url}}" alt="" width="400" height="300">
+
             <p class=" text-2xl py-3 text-slate-600" >
-                 Rs. {{myitem.price}} 
+                 <i> &#8377;</i> {{myitem.price}} 
+                 
             </p>
-                <p>
-                    {{myitem.description}}
-                </p>
+            <p class="text-green-700 text-lg"> In stock</p>
+            <p class="text-lg">
+                {{myitem.description}}
+            </p>
 
-            <img src="{{ myitem.image.url}}" alt="" width="400" height="300">
+            
 
-            <div class="flex-row justify-center">
-                <button class="flex-none bg-orange-300 border-2 border-orange-600 hover:bg-yellow-300 hover:text-slate-500
-                text-slate-800 text-xl px-3 py-2 mt-3 rounded-full" id="morebtn"> 
-                Buy now
+            <div class="flex justify-evenly">
+                <button class="flex-none bg-yellow-300 shadow-md shadow-orange-600 transition delay-75 hover:bg-red-400 
+                hover:scale-105 hover:text-white text-slate-800 text-xl px-4 py-2 mt-3 rounded-full" > 
+                Add to Cart
                 </button>
                 
-                <button class="flex-none bg-orange-300 hover:bg-yellow-300 hover:text-slate-500
-                text-slate-800 text-xl px-3 py-2 mt-3 rounded-full" id="morebtn"> 
-                Add to Cart
+                <button class="flex-none bg-orange-300 shadow-md shadow-red-600 transition delay-75 hover:bg-orange-400
+                hover:scale-105 hover:text-white text-slate-800 text-xl px-6 py-2 mt-3 rounded-full" > 
+                Buy Now
                 </button> 
             </div>
             
         </div>
-        <div style="display: none" class="item-more-details p-3 mx-10 my-3 text-center 
-                    bg-slate-300">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat, ad? Sint aliquid dicta minima eligendi quis quasi aperiam id laborum minus animi ducimus, dignissimos iusto sed a repellat omnis. Possimus!
-        </div>
+       
 
     </div>
-    <script>
-        morebtn = document.getElementById('morebtn')
-        morebtn.addEventListener('click', function(){
-
-            morebtn.style.display = 'none';
-            document.querySelector('.item-more-details').style.display = 'contents'
-        })
-    </script>
+    
 
 {% endblock %}

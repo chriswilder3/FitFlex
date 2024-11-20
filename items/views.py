@@ -54,7 +54,7 @@ def items(request):
               # Note that we already added data into DB/model using
               # py manage.py shell, 
 
-       items = Item.objects.all().values()       
+       items = Item.objects.all().values()      
        # print(items)
               # model_name.objects : Django automatically provides a
               # manager object called .objects for all models. Using 
@@ -126,7 +126,7 @@ def items(request):
 
        # Now lets load the model data in the views to send it to the
               # template.
-       myitems = Item.objects.all().values()
+       myitems = Item.objects.all()
               # Items queryset to be sent
        myTemplate = loader.get_template('items.html')
 

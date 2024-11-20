@@ -346,36 +346,8 @@ def dashboard( request):
     # def dashboard_view(request):
     #     #do something
 
-
-# def sample( request):
-#     if request.method == 'POST':
-#         form = SampleForm( request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login( request, user)
-#             print('succes')
-#             return redirect('/users/dashboard/')
-#         else:
-#             print('failed')
-#             return redirect('/users/sample/')
-
-#     else:
-#         form = SampleForm()
-#         return render( request, 'sample.html', { 'form':form})
-
-
-# def login_view(request):
-#     if request.method == 'POST':
-#         username = request.POST['username']
-#         password = request.POST['password']
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return redirect('dashboard')  # Redirect to the user dashboard
-#         else:
-#             return render(request, 'login.html', {'error': 'Invalid credentials'})
-#     return render(request, 'login.html')
-
-# @login_required
-# def dashboard_view(request):
-#     return render(request, 'dashboard.html')
+def logout_view( request):
+    # Make sure to give different name to this view other than logout, 
+    # otherwise it will clash with logout below and give Infinite Recursion Eror
+    logout( request)
+    return redirect('/')

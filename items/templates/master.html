@@ -19,7 +19,9 @@
         }
     </style>
     {% endblock %}
-
+    <style>
+        
+    </style>
     
 </head>
 
@@ -32,18 +34,18 @@
                   <a href="/">  <img src="{% static 'fitflex.png' %}" width="100px" height="80px" style="background-size: contain;"alt="">
                   </a>
                 </li>
-                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 ">
+                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50">
                     <a href="/items/">Shop</a>
                 </li>
-                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 ">
+                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50">
                     <a href="#">About</a>
                 </li>
-                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 ">
+                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50">
                     <a href="#">Contact</a>
                 </li>
 
                 <!-- Login Button -->
-                <li class="user-nav-full flex-none text-center ml-auto px-3 py-1 bg-white text-slate-600 mx-3 rounded-md"
+                <li class="user-nav-full flex-none text-center ml-auto px-3 py-1 bg-slate-950 border-white border-2  mx-3 rounded transition delay-80 hover:scale-105 hover:text-slate-800 hover:bg-slate-50 cursor-pointer"
                     style="position: relative;">
                     <!-- {% if logged_in_user %}
                         <a href="{% url 'dashboard' %}">Welcome, {{ logged_in_user.username}}</a>
@@ -62,7 +64,7 @@
         </nav>
     </div>
     {% block content%}
-    <div class="jumbotron px-5 pt-5 pb-9">
+    <div class="jumbotron px-5 pt-5 pb-9 ">
         <h1 class="text-5xl text-red-600 py-4 font-bold">
             FitFlex 
         </h1>
@@ -74,7 +76,7 @@
         </p>
         <a href="/items" class="bg-red-500 
             hover:bg-red-300 hover:text-slate-500 
-            text-white text-2xl px-2 py-1 mt-3 ml-5 rounded-md"> 
+            text-white text-2xl px-2 py-2 mt-3 rounded-md"> 
             Buy Now
         </a>
     </div>
@@ -95,13 +97,24 @@
             const userNavDiv = document.createElement('div')
             userNavDiv.style.padding = '10px'
             userNavDiv.className = 'user-nav-dropdown'
-            userNavDiv.style.zIndex = 10
-            userNavDiv.innerHTML ='  <br> <a href="/users/dashboard/" class="flex-none text-center ml-auto px-3 py-1 bg-slate-200 text-slate-600 mx-3 rounded-md "> Dashboard </a>  <a href="/users/logout/" class="flex-none text-center ml-auto px-3 py-1 bg-slate-200 text-slate-600 mx-3 rounded-md "> logout </a> '
+            // userNavDiv.style.width = '200px'
+            // userNavDiv.style.height = '60px'
+            userNavDiv.style.zIndex = '10'
+            userNavDiv.style.position = 'absolute'
+            userNavDiv.style.borderRadius = '5px'
+            userNavDiv.style.backgroundColor = '#2d3748'; // Dark background color
+            userNavDiv.style.border = '1px solid white';
+        
+
+            userNavDiv.innerHTML =' <a href="/users/dashboard/" class="flex-none text-center px-2  bg-slate-950 text-white mx-1 my-1 rounded-md "> Dashboard </a> <br> <a href="/users/logout/" class="flex-none text-center px-2  bg-slate-950 text-white mx-1 my-1 rounded-md "> logout </a> '
             
             userNavDiv.classList.add('fade-in');
 
+    
+
             setTimeout(() => {
                 document.querySelector('.user-nav-full').appendChild(userNavDiv)
+            
             }, 200); 
 
             

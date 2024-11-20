@@ -19,6 +19,7 @@
         }
     </style>
     {% endblock %}
+
     
 </head>
 
@@ -42,12 +43,20 @@
                 </li>
 
                 <!-- Login Button -->
-                <li class="flex-none text-center ml-auto px-3 py-1 bg-white text-slate-600 mx-3 rounded-md">
-                    {% if logged_in_user %}
+                <li class="user-nav-full flex-none text-center ml-auto px-3 py-1 bg-white text-slate-600 mx-3 rounded-md"
+                    style="position: relative;">
+                    <!-- {% if logged_in_user %}
                         <a href="{% url 'dashboard' %}">Welcome, {{ logged_in_user.username}}</a>
                     {% else %}
-                        <a href="/users/signin">Login</a>
+                        
+                    {% endif %} -->
+
+                    {% if logged_in_user %}
+                       <span class="user-nav"> &#9660; {{ logged_in_user.username}} </span> 
+                    {% else %}
+                        <a href="/users/signin"> &#9654; Login</a>
                     {% endif %}
+                    
                 </li>
             </ul>
         </nav>
@@ -70,6 +79,37 @@
         </a>
     </div>
     {% endblock %}
+
+    <script>
+        const userNav = document.querySelector('.user-nav-full')
+        userNav.addEventListener('click', function (){
+            const existDiv = document.querySelector('.user-nav-dropdown')
+
+            if (existDiv){ 
+                existDiv.classList.add('fadeout')
+                setTimeout( () => existDiv.remove(), 150) // Make the trnstion
+                                                         // More smoother
+                return;
+            }
+
+            const userNavDiv = document.createElement('div')
+            userNavDiv.style.padding = '10px'
+            userNavDiv.className = 'user-nav-dropdown'
+            userNavDiv.style.zIndex = 10
+            userNavDiv.innerHTML ='  <br> <a href="/users/dashboard/" class="flex-none text-center ml-auto px-3 py-1 bg-slate-200 text-slate-600 mx-3 rounded-md "> Dashboard </a>  <a href="/users/logout/" class="flex-none text-center ml-auto px-3 py-1 bg-slate-200 text-slate-600 mx-3 rounded-md "> logout </a> '
+            
+            userNavDiv.classList.add('fade-in');
+
+            setTimeout(() => {
+                document.querySelector('.user-nav-full').appendChild(userNavDiv)
+            }, 200); 
+
+            
+
+             // Give browser time to render for smooth animation
+        }
+        )
+    </script>
 
     <footer class=" bg-red-100 bottom-0 mt-auto">
         <h3 class=" ml-4 text-xl pt-3">

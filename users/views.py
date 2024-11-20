@@ -166,6 +166,14 @@ def signup(request):
         if form.is_valid():
             formData = form.cleaned_data
             # Create new user with hashed password
+            dbUser = User(
+                name=formData['name'],
+                username=formData['username'],
+                email=formData['email'],
+                phone = formData['phone'],
+                password=formData['password']  # Note: create_user hashes the password automatically
+            )
+            dbUser.save()
             newUser = AuthUser.objects.create_user(
                 first_name=formData['name'],
                 username=formData['username'],
@@ -316,14 +324,14 @@ def dashboard( request):
         # need to get hold of the username to know everything abt him
         # since usernames are unique.
         # Hence lets fetch, username and pass it to the user to
-        # be printed.
-        print(user)
+        # be printed.  
+        dbUser = User.objects.get(username = user)
+        print(dbUser.name)
         context ={
-            'userinfo': user,
+            'user': dbUser,
         }
-        print(user.username)
         return render( request, 'dashboard.html', context)
-        
+
     else:
         print(' Anonyymous user, returning to login...')
         return redirect( '/users/signin/')

@@ -173,9 +173,14 @@ def item_details( request , id):
 
 def home(request):
        # Home page of the site
-       template = loader.get_template('index.html')
+       # template = loader.get_template('index.html')
    
-       return HttpResponse( template.render())
+       # return HttpResponse( template.render())
+       # Completely abandon the HttpResponse methods. They 
+       # dont work with context processors. They are ShIT
+
+       return render( request, 'index.html')
+
 
 
 def test( request ):

@@ -43,7 +43,11 @@
 
                 <!-- Login Button -->
                 <li class="flex-none text-center ml-auto px-3 py-1 bg-white text-slate-600 mx-3 rounded-md">
-                    <a href="/users/signin">Login</a>
+                    {% if logged_in_user %}
+                        <a href="{% url 'dashboard' %}">Welcome, {{ logged_in_user.username}}</a>
+                    {% else %}
+                        <a href="/users/signin">Login</a>
+                    {% endif %}
                 </li>
             </ul>
         </nav>

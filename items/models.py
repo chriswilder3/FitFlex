@@ -23,13 +23,13 @@ class Item(models.Model):
 
         price = models.DecimalField(max_digits=10, decimal_places=2) 
 
-        description = models.TextField()
+        description = models.TextField( default = 'General')
         
-        category = models.CharField( max_length = 255)
+        category = models.CharField( max_length = 255, blank= True)
 
         sub_category = models.CharField( max_length = 255, blank= True)
 
-        item_type = models.CharField( max_length = 255)
+        item_type = models.CharField( max_length = 255, blank = True)
 
         image = models.ImageField( blank= True)
 

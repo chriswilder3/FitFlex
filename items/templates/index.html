@@ -6,7 +6,6 @@
     <style>
         .jumbotron{
             background-image: url('{% static "man_run_sports.png" %}');
-            
             background-repeat: no-repeat;
             background-position: bottom;
             
@@ -32,13 +31,19 @@
         </a>
     </div>
 
-    <div class=" carousel px-5 pt-5 pb-9 ">
-    
-        <h3 class=" text-3xl py-2 text-slate-700 ">
-             Best Items for you
-        </h3>
-        
-    </div>
+    <h3 class=" text-3xl px-5 pt-5 pb-9 text-slate-700 font-bold ">
+        Best Items for you
+   </h3>
+    <div class="carousel px-5 pt-5 pb-9 flex flex-wrap text-center justify-center">
+        {% for p in best_products %}
+        <div class=" text-lg font-semibold m-5 border-2 border-slate-300 p-3">
 
+                <p class=" border-2 border-gray-500"> {{p.category}} </P>
+                    
+                <a href="{% url 'details' p.id %}"> <img src="{{ p.image.url }}" alt="" width="300" height="250"> </a>
+                <p class=""> {{p.name}} </P>
+        </div>
+        {% endfor %}
+    </div>
 
     {% endblock %}

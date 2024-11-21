@@ -181,7 +181,77 @@ def home(request):
        # Completely abandon the HttpResponse methods. They 
        # dont work with context processors. They are ShIT
 
-       return render( request, 'index.html')
+       # We need to fetch some products to display on carousel
+       # In the home page.
+
+       # First lets fetch categories 
+       # There are two methods to fetch individual fieldvalues
+       # 1. values_list()     (rembers 's' after value, values_list())
+
+       # products = Item.objects.values_list('category','sub_category')
+               
+               # Returns a tuple of field values for each object. 
+               # We can specify flat=True if fetching only one field.
+       
+       # for p in products:
+       #        print(p)
+              # ('Fitness Equipment', 'Accessories')
+              # ('Wellness', 'Massage Tools')
+              # ('Apparel', 'Men’s Wear')
+       # Remember to print with foor loop otherwise it will
+       # printing products directly gives queryset not list of tuples
+
+       # But we may want single field, lets try with flat =True
+
+       categories = Item.objects.values_list('category', flat = True)
+       print(categories)
+              # <Queryset 'Fitness Equipment', 'Fitness Equipment',
+              #  'Sports', 'Sports',..so on >
+
+       # Since they are printed for every object they are not unique,
+       # Lets convert them to sets which remove duplicates
+       categories = set(categories)
+       # print(categories)
+       # {'Outdoor & Adventure', 'Apparel', 'Fitness Equipment', 
+       # 'Footwear', 'Wearable Tech', 'Nutrition & Supplements',
+       #  'Wellness', 'Sports'}
+
+       # Lets take the best item(for now assume, costlier ones
+       # are better), for each category and send them to home
+       # for caresoul display. But first lets learn another
+       # way of fetching particular field values
+
+       # 2. values() : This method returns dictionary for each
+       # object with field names as keys and field values as values
+       
+       # cat2 =  Item.objects.values('category', 'sub_category')
+       # print(cat2)
+
+       # <Queryset {'category': 'Fitness Equipment', 
+       # 'sub_category': 'Accessories'}, ... so on>
+
+       # To get the best(top price) item for each category, there
+       # are multiple ways :
+       # Here is the query we need to write:
+       # for each category, find element with top price
+       best_products = []
+       for c in categories:
+             products_in_c =  list(Item.objects.filter( category = c))
+             print( products_in_c[:2])
+             max_price = 0
+             max_elem = products_in_c[0]
+             for p in products_in_c:
+              if p.price > max_price:
+                     max_price = p.price
+                     max_elem = p
+             best_products.append(max_elem)
+       print(best_products)
+
+       context = {
+              'best_products':best_products,
+       }
+
+       return render( request, 'index.html', context)
 
 
 

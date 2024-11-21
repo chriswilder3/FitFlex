@@ -42,26 +42,24 @@
         <h1 class="text-4xl text-red-600 py-4 font-bold">
             Fitness Equipment :
         </h1>
-        <ul class="flex flex-row flex-wrap m-3 text-lg  ">
+        <div class="flex flex-wrap text-lg text-center ">
             {% for x in myitems%}
             {% if x.category == 'Fitness Equipment' %}
-            <a  class=" basis-4 py-4 " href="item_details/{{x.id}} "> 
-                <li class=" min-w-32 p-2 mx-3 min-h-32 bg-slate-200 
-                            hover:scale-105 active:bg-red-300 rounded-md">
-                            <!-- style="background-image: url('{{ x.image.url }}'); background-repeat: no-repeat; background-size: contain;">  -->
-
+            <div class="basis-48 text-lg font-semibold m-5 border-2 border-slate-300 p-3 ">
+                <a  class="  " href="item_details/{{x.id}} "> 
+            
                       
-                    <img width ='120' height='100', src="{{ x.image.url }}" alt="">
+                    <img width ='300' height='250', src="{{ x.image.url }}" alt="">
                     {{x.name}} 
-                </li>
-                
-            </a> 
+                </a> 
+            </div>    
+             
              {% endif %}   
-                {% comment %} {{ x.id }} dynamically inserts the ID of the current member (x) 
-                into the URL.and hence hyperlinks are created for each member {% endcomment %}
+                <!-- {{ x.id }} dynamically inserts the ID of the current member (x) 
+                into the URL.and hence hyperlinks are created for each member  -->
             
             {% endfor %}
-        </ul>
+        </div>
 
         <!-- <a href="#" class="bg-red-500 hover:bg-red-300 hover:text-slate-500
             text-white text-2xl px-2 py-1 mt-3 rounded-md"> 

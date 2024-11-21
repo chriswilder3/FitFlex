@@ -204,7 +204,7 @@ def home(request):
        # But we may want single field, lets try with flat =True
 
        categories = Item.objects.values_list('category', flat = True)
-       print(categories)
+       # print(categories)
               # <Queryset 'Fitness Equipment', 'Fitness Equipment',
               #  'Sports', 'Sports',..so on >
 
@@ -237,7 +237,7 @@ def home(request):
        best_products = []
        for c in categories:
              products_in_c =  list(Item.objects.filter( category = c))
-             print( products_in_c[:2])
+             # print( products_in_c[:2])
              max_price = 0
              max_elem = products_in_c[0]
              for p in products_in_c:
@@ -245,7 +245,7 @@ def home(request):
                      max_price = p.price
                      max_elem = p
              best_products.append(max_elem)
-       print(best_products)
+       # print(best_products)
 
        context = {
               'best_products':best_products,

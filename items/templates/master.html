@@ -34,14 +34,14 @@
                 <!-- Navigation Links -->
                 <li class="flex-none text-center border-black border-2 px-3 py-1 mx-3 rounded 
                      hover:border-2 hover:border-white" >
-                  <a href="/">  <img src="{% static 'fitflex.png' %}" width="100px" height="80px" style="background-size: contain;"alt="">
+                  <a href="/">  <img src="{% static 'fitflex2.png' %}" width="110px" height="90px" style="background-size: contain;"alt="">
                   </a>
                 </li>
-                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50">
+                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50 rounded-md">
                     <a href="/items/"> <span class="downarrow text-sm pr-1"> <i class="fas fa-chevron-down"></i></span>  
                         Shop</a>
                 </li>
-                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50">
+                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50 rounded-md">
                     <a href="#"> <span class="downarrow text-sm pr-1"> <i class="fas fa-chevron-down"></i></span> 
                         About</a>
                 </li>
@@ -73,22 +73,7 @@
         </nav>
     </div>
     {% block content%}
-    <div class="jumbotron px-5 pt-5 pb-9 ">
-        <h1 class="text-5xl text-red-600 py-4 font-bold">
-            FitFlex 
-        </h1>
-        <h3 class=" text-3xl py-2 text-slate-700 ">
-            Gear Up for Your Fitness Journey
-        </h3>
-        <p class=" py-2 text-xl my-3 text-red-500">
-            We offer top tier fitness gear, apparel, and accessories to empower health enthusiasts and athletes.
-        </p>
-        <a href="/items" class="bg-red-500 
-            hover:bg-red-300 hover:text-slate-500 
-            text-white text-2xl px-2 py-2 mt-3 rounded-md"> 
-            Buy Now
-        </a>
-    </div>
+    
     {% endblock %}
 
     <script>

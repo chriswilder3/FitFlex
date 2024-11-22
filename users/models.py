@@ -24,6 +24,9 @@ class User( models.Model):
     password= models.CharField( max_length = 255,
                                  null = False)
 
+    cart = models.JSONField( null = True)
+
+    orders = models.JSONField( null = True)
     
 
     def __str__(self):

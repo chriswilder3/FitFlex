@@ -171,6 +171,7 @@ def item_details( request , id):
        context = {
               'myitem' : requested_Item,
        }
+
        return HttpResponse( template.render( context, request))
 
 def home(request):

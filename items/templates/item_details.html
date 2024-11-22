@@ -21,7 +21,7 @@
                 {{myitem.name}} 
             </h3>
             
-            <img class="border-2 " src="{{ myitem.image.url}}" alt="" width="400" height="300">
+            <img class="product-img border-2 " src="{{ myitem.image.url}}" alt="" width="400" height="300">
 
             <p class=" text-2xl py-3 text-slate-600" >
                  <i> &#8377;</i> {{myitem.price}} 
@@ -35,21 +35,67 @@
             
 
             <div class="flex justify-evenly">
-                <button class="flex-none bg-yellow-300 shadow-md shadow-orange-600 transition delay-75 hover:bg-red-400 
-                hover:scale-105 hover:text-white text-slate-800 text-xl px-4 py-2 mt-3 rounded-full" > 
-                Add to Cart
-                </button>
                 
-                <button class="flex-none bg-orange-300 shadow-md shadow-red-600 transition delay-75 hover:bg-orange-400
-                hover:scale-105 hover:text-white text-slate-800 text-xl px-6 py-2 mt-3 rounded-full" > 
-                Buy Now
-                </button> 
+                {% if logged_in_user %}
+                
+                    <a href='/users/dashboard/' class="addCartBtn flex-none bg-yellow-300 shadow-md shadow-orange-600 transition delay-75 hover:bg-red-400 
+                    hover:scale-105 hover:text-white text-slate-800 text-xl px-4 py-2 mt-3 rounded-full" > 
+                    Add to Cart
+                    </a>
+
+                    <a href='/user/dashboard/' class="buyBtn flex-none bg-orange-300 shadow-md shadow-red-600 transition delay-75 hover:bg-orange-400
+                    hover:scale-105 hover:text-white text-slate-800 text-xl px-6 py-2 mt-3 rounded-full" > 
+                    Buy Now
+                    </a> 
+                {% else %}
+
+                    <a href='{% url "signin" %}' class="addCartBtn flex-none bg-yellow-300 shadow-md shadow-orange-600 transition delay-75 hover:bg-red-400 
+                    hover:scale-105 hover:text-white text-slate-800 text-xl px-4 py-2 mt-3 rounded-full" > 
+                    Add to Cart
+                    </a>
+
+                    <a href='{% url "signin" %}' class="buyBtn flex-none bg-orange-300 shadow-md shadow-red-600 transition delay-75 hover:bg-orange-400
+                    hover:scale-105 hover:text-white text-slate-800 text-xl px-6 py-2 mt-3 rounded-full" > 
+                    Buy Now
+                    </a> 
+                {% endif %}
+
+
+                
             </div>
             
         </div>
        
 
     </div>
+    <script>
+        addCartBtn = document.querySelector('.addCartBtn')
+        buyBtn = document.querySelector('.buyBtn')
+
+        addCartBtn.addEventListener('click', function(){
+
+        })
+    </script>
+
+    <script>
+        const img = document.querySelector('.product-img')
+        let displayZoom;
+        img.addEventListener('mouseover', function(e){
+            console.log(e);
+            displayZoom = document.createElement('div')
+            displayZoom.style.zIndex = 10;
+            displayZoom.style.position = 'fixed';
+            displayZoom.innerHTML =" lorem epsum"
+           img.appendChild(displayZoom);
+
+        })
+        img.addEventListener('mouseleave', function(e){
+            console.log(e);
+            img.removeChild(displayZoom);
+
+        })
+
+    </script>
     
 
 {% endblock %}

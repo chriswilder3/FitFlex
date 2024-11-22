@@ -3,8 +3,12 @@
 FitFlex is an online e-commerce platform dedicated to providing high-quality fitness gear, apparel, and accessories for health enthusiasts and athletes alike. Whether you're hitting the gym, going for a run, or exploring yoga, FitFlex empowers your fitness journey with the right tools and style.
 
 ---
-## Current Progress Screenshots:
+## Prev and Current Progress Screenshots:
   ![screenshot](media/index_screenshot.PNG)
+    ↓
+  ![Screenshot](media/index2.png)
+  ![Screenshot](media/items_browse_page.png)
+  ![Screenshot](media/dashboard.png)
 
 ## 🌟 **Features**
 - **Dynamic Product Catalog**  

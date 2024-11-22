@@ -338,22 +338,34 @@ def dashboard( request):
             itemId = request.POST.get('itemId', None)
             print(cartOrBuy)
             if cartOrBuy == 'buy':
-                if initialOrders == None:
-                    dbUser.orders = {itemId : 1}
-                    dbUser.save()
+                if itemId not in initialOrders:
+                    if initialOrders:
+                        ordersdict = dbUser.orders
+                        ordersdict[itemId] =  1
+                        dbUser.orders = ordersdict
+                        dbUser.save()
+                    else:
+                        dbUser.orders = {itemId : 1}
+                        dbUser.save()
                 else:
                     ordersdict = dbUser.orders
                     ordersdict[itemId] = ordersdict[itemId] + 1
-                    dbUser.update(  orders = ordersdict)
+                    dbUser.orders = ordersdict
                     dbUser.save()
             else:
-                if initialCart == None:
-                    dbUser.cart = {itemId : 1}
-                    dbUser.save()
+                if itemId not in initialCart :
+                    if initialCart:
+                        cartdict = dbUser.cart
+                        cartdict[itemId] = 1
+                        dbUser.cart = cartdict
+                        dbUser.save()
+                    else:
+                        dbUser.cart = {itemId : 1}
+                        dbUser.save()
                 else:
                     cartdict = dbUser.cart
                     cartdict[itemId] = cartdict[itemId] + 1
-                    dbUser.update(  cart = cartdict)
+                    dbUser.cart = cartdict
                     dbUser.save()
 
             # Now that we added the items, We need to render them

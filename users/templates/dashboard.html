@@ -46,13 +46,34 @@
             <!-- Notice Another variable cart we imported -->
             <div class="userCart pt-3 flex flex-col items-center justify-evenly">
                 {% for cartItem, quantity in cart %}
-                    <div class="grid grid-cols-2 bg-slate-200">
+                    <div class="grid grid-cols-3 my-3 border-2 border-slate-400 px-10">
                         <img class ="w-35 h-44 mx-2 p-2" src="{{ cartItem.image.url }}" alt="">
                         <div class=" self-center">
-                            <p class="my-1"> {{ cartItem.name }} </p>
-                            <p class="my-1"> {{ cartItem.price }} </p> 
-                            <p class="my-1"> Quantity : {{ quantity }}</p>
-                            <a href="buy"></a>
+                            <p class="my-1 text-xl font-medium"> {{ cartItem.name }} </p>
+                            <p class="my-1 text-lg text-green-600 font-medium"> &#x20B9  {{ cartItem.price }} </p> 
+                            <p class="my-1 text-lg font-medium "> Quantity : {{ quantity }}</p>
+                        </div>
+                        <div class="self-center">
+                            <!-- Futher We can add these elements to orders to buy -->
+                            <!-- Form to Buy -->
+                            <form action="/users/dashboard/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="itemId" value="{{ cartItem.id }}">
+                                <button type="submit" name="cartOrBuy" value="buy" class="addCartBtn flex-none bg-yellow-300 shadow-md shadow-orange-600 transition delay-75 hover:bg-red-400 
+                                hover:scale-105 hover:text-white text-slate-800 text-xl px-4 py-2 mt-3 rounded-full" > 
+                                Buy Now
+                                </button>
+                            </form>
+
+                            <!-- Since the forms wont accept Delete, We can Keep the 
+                            Button here. And Do a deletion request using JS Async -->
+
+                            <button type="submit" name="delete" value="{{ cartItem.id }}" class="buyBtn flex-none bg-orange-300 shadow-md shadow-red-600 transition delay-75 hover:bg-orange-400
+                                hover:scale-105 hover:text-white text-slate-800 text-xl px-6 py-2 mt-3 rounded-full" > 
+                                Delete
+                            </button> 
+                            
+
                         </div>
                     </div>
                 {% endfor %} 
@@ -65,26 +86,52 @@
 
     <!-- ITEM ORDERS  -->
 
-        <div class="border-2 border-slate-200">
+    <div class="border-2 border-slate-200">
         <h3 class=" text-4xl px-5 pt-5  text-slate-700 font-bold ">
-            Your orders
+            Your Orders
         </h3>
-
-        {% if user.orders %}
+        {% if user.cart %}
+            
             <!-- Notice Another variable cart we imported -->
-            <div class="userCart pt-3 flex flex-col">
-                {% for cartItem in cart %}
-                <p> {{ cartItem.name}} </p>
-                <p> {{cartItem.price}} </p>  
-                    
+            <div class="userCart pt-3 flex flex-col items-center justify-evenly">
+                {% for cartItem, quantity in orders %}
+                    <div class="grid grid-cols-3 my-3 border-2 border-slate-400 px-10">
+                        <img class ="w-35 h-44 mx-2 p-2" src="{{ cartItem.image.url }}" alt="">
+                        <div class=" self-center">
+                            <p class="my-1 text-xl font-medium"> {{ cartItem.name }} </p>
+                            <p class="my-1 text-lg text-green-600 font-medium"> &#x20B9  {{ cartItem.price }} </p> 
+                            <p class="my-1 text-lg font-medium "> Quantity : {{ quantity }}</p>
+                        </div>
+                        <div class="self-center">
+                            <!-- Futher We can add these elements to orders to buy -->
+                            <!-- Form to Buy -->
+                            <form action="#">
+                                {% csrf_token %}
+                                <input type="hidden" name="itemId" value="{{ cartItem.id }}">
+                                <button type="submit" name="cartOrBuy" value="buy" class="addCartBtn flex-none bg-yellow-300 shadow-md shadow-orange-600 transition delay-75 hover:bg-red-400 
+                                hover:scale-105 hover:text-white text-slate-800 text-xl px-4 py-2 mt-3 rounded-full" > 
+                                Pay Now
+                                </button>
+                            </form>
+
+                            <!-- Since the forms wont accept Delete, We can Keep the 
+                            Button here. And Do a deletion request using JS Async -->
+
+                            <button type="submit" name="delete" value="{{ cartItem.id }}" class="buyBtn flex-none bg-orange-300 shadow-md shadow-red-600 transition delay-75 hover:bg-orange-400
+                                hover:scale-105 hover:text-white text-slate-800 text-xl px-6 py-2 mt-3 rounded-full" > 
+                                Delete
+                            </button> 
+                            
+
+                        </div>
+                    </div>
                 {% endfor %} 
             </div>
 
         {% else %}
             <p class="pt-3"> Sorry <i class="fas fa-frown"></i>! no items in your cart to show </p>
         {% endif %}
-        </div>
-
-
     </div>
+
+</div>
 {% endblock %}

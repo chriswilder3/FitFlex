@@ -21,63 +21,7 @@
     </style>
     {% endblock %}
     <style>
-                /* Dropdown styles */
-        .user-nav-dropdown {
-            position: absolute;
-            top: 100%; /* Adjust to place below the button */
-            right: 0;
-            background-color: #2d3748;
-            border: 1px solid white;
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-            z-index: 10;
-        }
-
-        /* Show dropdown */
-        .user-nav-dropdown.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Dropdown items */
-        .dropdown-item {
-            display: block;
-            padding: 8px 12px;
-            text-decoration: none;
-            color: white;
-            border-radius: 3px;
-            background-color: transparent;
-            transition: background-color 0.2s;
-        }
-
-        .dropdown-item:hover {
-            background-color: #4a5568; /* Slightly lighter background */
-        }
-
-        /* Button styles (optional) */
-        .user-nav-toggle {
-            background: #2d3748;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .user-nav-toggle:hover {
-            background: #4a5568;
-        }
-
-        /* Utility class */
-        .hidden {
-            display: none !important;
-        }
-        
+           
 
     </style>
     
@@ -101,13 +45,15 @@
                     <a href="#"> <span class="downarrow text-sm pr-1"> <i class="fas fa-chevron-down"></i></span> 
                         About</a>
                 </li>
-                <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50">
-                    <a href="#"> <span class="downarrow text-sm pr-1"> <i class="fas fa-chevron-down"></i></span>
-                        Contact</a>
+                <li class="flex-none text-center ml-14 pr-8 pl-6 py-2 bg-white  mx-3  text-slate-500 rounded-md
+                        transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50">
+                     <span class="downarrow text-sm "> <i class="fas fa-chevron-down"></i></span>
+                         <input class="rounded-md pl-2 py-1" type="text" placeholder="Search"> 
+                         <button type="submit" class="pl-2 hover:text-red-500 hover:scale-125"> <i class="fas fa-search"></i></button>
                 </li>
 
                 <!-- Login Button -->
-                <li class="user-nav-full flex-none text-center ml-auto px-3 py-1 bg-slate-950 border-white border-2  mx-3 rounded transition delay-80 hover:scale-105 hover:text-slate-800 hover:bg-slate-50 cursor-pointer"
+                 <li class="user-nav-full flex-none text-center ml-auto px-3 py-1 bg-slate-950 border-white border-2  mx-3 rounded transition delay-80 hover:scale-105 hover:text-slate-800 hover:bg-slate-50 cursor-pointer"
                     style="position: relative;">
                     <!-- {% if logged_in_user %}
                         <a href="{% url 'dashboard' %}">Welcome, {{ logged_in_user.username}}</a>
@@ -121,7 +67,8 @@
                         <a href="/users/signin"> &#9654; Login</a>
                     {% endif %}
                     
-                </li>
+                </li> 
+
             </ul>
         </nav>
     </div>
@@ -193,18 +140,16 @@
             
             userNavDiv.classList.add('fade-in');
 
-    
-
             setTimeout(() => {
                 document.querySelector('.user-nav-full').appendChild(userNavDiv)
-            
             }, 200); 
-
+             // Give browser time to render for smooth animation
+            }
+        )
+   
             
 
-             // Give browser time to render for smooth animation
-        }
-        )
+
     </script>
 
     <footer class="bg-slate-950 text-white mt-auto">

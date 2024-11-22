@@ -34,7 +34,7 @@
     <h3 class=" text-3xl px-5 pt-5 pb-9 text-slate-700 font-bold ">
         Best Items for you
    </h3>
-    <div class="carousel px-5 pt-5 pb-9 flex flex-wrap text-center justify-center">
+    {% comment %} <div class="carousel px-5 pt-5 pb-9 flex flex-wrap text-center justify-center">
         {% for p in best_products %}
         <div class=" text-lg font-semibold m-5 border-2 border-slate-300 p-3
                 flex flex-col items-center">
@@ -45,6 +45,24 @@
                 <p class="mt-auto"> {{p.name}} </P>
         </div>
         {% endfor %}
+    </div> {% endcomment %}
+    <div class="carousel px-5 pt-5 pb-9 flex flex-wrap text-center justify-center">
+    {% for p in best_products %}
+    <div class="text-lg font-semibold m-5 border-2 border-slate-300 p-3 flex flex-col items-center w-80">
+        <!-- Product Category -->
+        <p class="px-6 border-2 border-gray-500">{{ p.category }}</p>
+
+        <!-- Product Image with Link -->
+        <a href="{% url 'details' p.id %}" class="block my-4">
+            <img src="{{ p.image.url }}" alt="{{ p.name }}" class=" w-50 h-52 rounded">
+        </a>
+
+        <!-- Product Name -->
+        <p class="mt-auto">{{ p.name }}</p>
     </div>
+    {% endfor %}
+</div>
+
+
 
     {% endblock %}

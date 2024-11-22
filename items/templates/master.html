@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitFlex</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     {% block styling %}
     <style>
@@ -20,12 +21,69 @@
     </style>
     {% endblock %}
     <style>
+                /* Dropdown styles */
+        .user-nav-dropdown {
+            position: absolute;
+            top: 100%; /* Adjust to place below the button */
+            right: 0;
+            background-color: #2d3748;
+            border: 1px solid white;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+            z-index: 10;
+        }
+
+        /* Show dropdown */
+        .user-nav-dropdown.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Dropdown items */
+        .dropdown-item {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: white;
+            border-radius: 3px;
+            background-color: transparent;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: #4a5568; /* Slightly lighter background */
+        }
+
+        /* Button styles (optional) */
+        .user-nav-toggle {
+            background: #2d3748;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .user-nav-toggle:hover {
+            background: #4a5568;
+        }
+
+        /* Utility class */
+        .hidden {
+            display: none !important;
+        }
         
+
     </style>
     
 </head>
 
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen ">
     <div class="nav-bar bg-slate-950 py-3 ">
         <nav >
             <ul class="flex items-center text-white text-lg font-medium">
@@ -36,13 +94,16 @@
                   </a>
                 </li>
                 <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50">
-                    <a href="/items/">Shop</a>
+                    <a href="/items/"> <span class="downarrow text-sm pr-1"> <i class="fas fa-chevron-down"></i></span>  
+                        Shop</a>
                 </li>
                 <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50">
-                    <a href="#">About</a>
+                    <a href="#"> <span class="downarrow text-sm pr-1"> <i class="fas fa-chevron-down"></i></span> 
+                        About</a>
                 </li>
                 <li class="flex-none text-center px-3 py-1 bg-slate-950 border-white border-2 mx-3 transition delay-80 hover:scale-110 hover:text-slate-800 hover:bg-slate-50">
-                    <a href="#">Contact</a>
+                    <a href="#"> <span class="downarrow text-sm pr-1"> <i class="fas fa-chevron-down"></i></span>
+                        Contact</a>
                 </li>
 
                 <!-- Login Button -->
@@ -55,7 +116,7 @@
                     {% endif %} -->
 
                     {% if logged_in_user %}
-                       <span class="user-nav"> &#9660; {{ logged_in_user.username}} </span> 
+                       <span class="user-nav"> <i class="fas fa-chevron-down"></i> {{ logged_in_user.username}} </span> 
                     {% else %}
                         <a href="/users/signin"> &#9654; Login</a>
                     {% endif %}
@@ -84,6 +145,27 @@
     {% endblock %}
 
     <script>
+        // Adds nav link arrow up/down logic
+        const navlinks = document.querySelectorAll('li');
+        navlinks.forEach((link) => {
+            link.addEventListener('mouseover', function () {
+                const arrow = link.querySelector('.fas');
+                if (arrow) {
+                    arrow.classList.remove('fa-chevron-down');
+                    arrow.classList.add('fa-chevron-up');
+                }
+            });
+
+            link.addEventListener('mouseout', function () {
+                const arrow = link.querySelector('.fas');
+                if (arrow) {
+                    arrow.classList.remove('fa-chevron-up');
+                    arrow.classList.add('fa-chevron-down');
+                }
+            });
+        });
+
+        // Adds usernav(dasboard/logout) to nav bar
         const userNav = document.querySelector('.user-nav-full')
         userNav.addEventListener('click', function (){
             const existDiv = document.querySelector('.user-nav-dropdown')
@@ -125,7 +207,7 @@
         )
     </script>
 
-    <footer class="bg-gray-800 text-white mt-auto">
+    <footer class="bg-slate-950 text-white mt-auto">
     <div class="container mx-auto py-8">
         <!-- Footer Top -->
         <div class="flex flex-wrap justify-between items-center px-4">

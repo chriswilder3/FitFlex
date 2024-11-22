@@ -9,6 +9,8 @@ from .forms import SignUpForm, SignInForm, SampleForm
 
 from .models import User
 
+from items.models import Item
+
 from django.contrib.auth import login,logout, authenticate
 
 from django.contrib.auth.models import User as AuthUser
@@ -319,18 +321,89 @@ def dashboard( request):
     #  of User (AuthUser in our case).
     user = request.user
     if user.is_authenticated:
-        # User is now on his dashboard. But we also need
-        # to pass userinfo to it. But note that, We only
-        # need to get hold of the username to know everything abt him
-        # since usernames are unique.
-        # Hence lets fetch, username and pass it to the user to
-        # be printed.  
-        dbUser = User.objects.get(username = user)
-        print(dbUser.name)
-        context ={
-            'user': dbUser,
-        }
-        return render( request, 'dashboard.html', context)
+        if request.method == 'POST':
+            # User is logged in and added something to cart/order
+            # in the item details page.
+
+            # Lets first get his corresponding model object
+            dbUser = User.objects.get( username = user)
+            initialCart = dbUser.cart
+            initialOrders = dbUser.orders
+            print(initialCart)
+            print(initialOrders)
+
+            # POST.get gives the variable values if they were set
+            # while submitting data, or it give none otherwise
+            cartOrBuy = request.POST.get('cartOrBuy',None)
+            itemId = request.POST.get('itemId', None)
+            print(cartOrBuy)
+            if cartOrBuy == 'buy':
+                if initialOrders == None:
+                    dbUser.orders = {itemId : 1}
+                    dbUser.save()
+                else:
+                    ordersdict = dbUser.orders
+                    ordersdict[itemId] = ordersdict[itemId] + 1
+                    dbUser.update(  orders = ordersdict)
+                    dbUser.save()
+            else:
+                if initialCart == None:
+                    dbUser.cart = {itemId : 1}
+                    dbUser.save()
+                else:
+                    cartdict = dbUser.cart
+                    cartdict[itemId] = cartdict[itemId] + 1
+                    dbUser.update(  cart = cartdict)
+                    dbUser.save()
+
+            # Now that we added the items, We need to render them
+            # We can simply redirect them again to same page
+            # but with get request (redirects lead to GET request)
+            return redirect('/users/dashboard/')
+
+
+        elif request.method == 'GET':
+            # User is authenticated but has not added anything to 
+            # cart or order.
+
+            # User is now on his dashboard. But we also need
+            # to pass userinfo to it. But note that, We only
+            # need to get hold of the username to know everything abt him
+            # since usernames are unique.
+            # Hence lets fetch, username and pass it to the user to
+            # be printed.  
+            dbUser = User.objects.get(username = user)
+            
+            tempCart = dbUser.cart 
+            tempOrders = dbUser.orders
+            # Note that this is a dict With itemId as key and quant as val
+            finalCart = []
+            if tempCart != None:
+                for itemId,quant in tempCart.items():
+                    itemObj = Item.objects.get( id = itemId)
+                    finalCart.append( (itemObj, quant) )
+                    
+                    # Hence Now we can access cart elements and quant 
+                    # in the template as 
+                    #       for item, qunt in cart :  .....
+                
+            print(finalCart)
+
+            finalOrders = []
+            if tempOrders != None:
+                for itemId,quant in tempOrders.items():
+                    itemObj = Item.objects.get( id = itemId)
+                    finalOrders.append( (itemObj, quant) )
+        
+            print(finalOrders)
+           
+            context ={
+                'user': dbUser,
+                'itemCount': tempCart,
+                'cart': finalCart,
+                'orders': finalOrders,
+            }
+            return render( request, 'dashboard.html', context)
 
     else:
         print(' Anonyymous user, returning to login...')

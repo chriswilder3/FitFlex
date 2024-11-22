@@ -37,16 +37,33 @@
             <div class="flex justify-evenly">
                 
                 {% if logged_in_user %}
-                
-                    <a href='/users/dashboard/' class="addCartBtn flex-none bg-yellow-300 shadow-md shadow-orange-600 transition delay-75 hover:bg-red-400 
+
+                <!-- Since there are two buttons, If we keep in same form
+                now We will submit both values at once even though only
+                one btn was clicked and only value must be sent.
+
+                Hence we will keep 2 seperate forms. And we will also have 
+                1 hidden input tag in each form that contains actual value
+                and , buttons are there to only indicate 
+                in the target dashboard view, whether add to cart was clicked
+                or buy now. -->
+
+                <form action="/users/dashboard/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="itemId" value="{{ myitem.id }}">
+                    <button type="submit" name="cartOrBuy" value="cart" class="addCartBtn flex-none bg-yellow-300 shadow-md shadow-orange-600 transition delay-75 hover:bg-red-400 
                     hover:scale-105 hover:text-white text-slate-800 text-xl px-4 py-2 mt-3 rounded-full" > 
                     Add to Cart
-                    </a>
-
-                    <a href='/user/dashboard/' class="buyBtn flex-none bg-orange-300 shadow-md shadow-red-600 transition delay-75 hover:bg-orange-400
+                    </button>
+                </form>
+                <form action="/users/dashboard/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="itemId" value="{{ myitem.id }}">
+                    <button type="submit" name="cartOrBuy" value="buy" class="buyBtn flex-none bg-orange-300 shadow-md shadow-red-600 transition delay-75 hover:bg-orange-400
                     hover:scale-105 hover:text-white text-slate-800 text-xl px-6 py-2 mt-3 rounded-full" > 
                     Buy Now
-                    </a> 
+                    </button> 
+                </form>
                 {% else %}
 
                     <a href='{% url "signin" %}' class="addCartBtn flex-none bg-yellow-300 shadow-md shadow-orange-600 transition delay-75 hover:bg-red-400 

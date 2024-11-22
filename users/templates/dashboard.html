@@ -13,21 +13,78 @@
 {% endblock %}
 
 {% block content %}
-    <div class="jumbotron px-5 pt-5 pb-9">
-        <h1 class="text-5xl text-red-600 py-4 font-bold">
-            FitFlex 
+
+    <div class=" jumbotron px-5 pt-5 pb-9 bg-gradient-to-b from-orange-300 from-35% to-red-200 to-90%">
+        <h1 class="text-5xl text-red-500 py-4 font-bold ">
+            Welcome {{user.name}},
         </h1>
-        <h3 class=" text-3xl py-2 text-slate-700 ">
-            Welcome {{ user.name}},
+        <h3 class=" text-3xl py-2 font-semibold text-slate-700 ">
+            Access your cart items and orders here.
         </h3>
-        <p class=" py-2 text-xl my-3 text-red-500">
-            We offer top tier fitness gear, apparel, and accessories to empower health enthusiasts and athletes.
+        <p class=" py-2 text-xl my-3 text-slate-700">
+            You can continue to browse more items. Happy Sporting.
         </p>
-        <a href="/items" class="bg-red-500 
-            hover:bg-red-300 hover:text-slate-500 
-            text-white text-2xl px-2 py-1 mt-3 ml-5 rounded-md"> 
-            Buy Now
+        <a href="/items" class=" ml-8 " >
+        <span class="bg-black text-white text-2xl font-semibold px-3 py-2 mt-3 ml-5  
+            rounded-md shadow-inner
+                transition delay-80 hover:scale-110 hover:bg-white hover:text-black  "> 
+            Browse
+            </span>
         </a>
     </div>
 
+    
+    <div class="dashBoard mx-4 my-3 text-center grid grid-cols-2 gap-6">
+
+    <!-- CART ITEMS  -->
+        <div class="border-2 border-slate-200">
+        <h3 class=" text-4xl px-5 pt-5  text-slate-700 font-bold ">
+            Your Cart
+        </h3>
+        {% if user.cart %}
+            
+            <!-- Notice Another variable cart we imported -->
+            <div class="userCart pt-3 flex flex-col items-center justify-evenly">
+                {% for cartItem, quantity in cart %}
+                    <div class="grid grid-cols-2 bg-slate-200">
+                        <img class ="w-35 h-44 mx-2 p-2" src="{{ cartItem.image.url }}" alt="">
+                        <div class=" self-center">
+                            <p class="my-1"> {{ cartItem.name }} </p>
+                            <p class="my-1"> {{ cartItem.price }} </p> 
+                            <p class="my-1"> Quantity : {{ quantity }}</p>
+                            <a href="buy"></a>
+                        </div>
+                    </div>
+                {% endfor %} 
+            </div>
+
+        {% else %}
+            <p class="pt-3"> Sorry <i class="fas fa-frown"></i>! no items in your cart to show </p>
+        {% endif %}
+        </div>
+
+    <!-- ITEM ORDERS  -->
+
+        <div class="border-2 border-slate-200">
+        <h3 class=" text-4xl px-5 pt-5  text-slate-700 font-bold ">
+            Your orders
+        </h3>
+
+        {% if user.orders %}
+            <!-- Notice Another variable cart we imported -->
+            <div class="userCart pt-3 flex flex-col">
+                {% for cartItem in cart %}
+                <p> {{ cartItem.name}} </p>
+                <p> {{cartItem.price}} </p>  
+                    
+                {% endfor %} 
+            </div>
+
+        {% else %}
+            <p class="pt-3"> Sorry <i class="fas fa-frown"></i>! no items in your cart to show </p>
+        {% endif %}
+        </div>
+
+
+    </div>
 {% endblock %}
